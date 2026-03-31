@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>信诺时代 ETS 企业高级技术支持服务</title>
+  <meta name="description" content="从救火到防灾，企业级 IT 技术支持的订阅制服务">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS 变量系统（OKLCH 色彩空间）===== */
+    :root {
+      /* 基础色板 - OKLCH */
+      --color-bg: #0f0f0f;
+      --color-bg-alt: #161616;
+      --color-surface: rgba(30, 30, 30, 0.8);
+      --color-surface-hover: rgba(40, 40, 40, 0.9);
+      
+      /* 中性色（带暖色调，非纯灰） */
+      --color-text: #f0f0f0;
+      --color-text-secondary: #a8a8a8;
+      --color-text-muted: #6b6b6b;
+      --color-border: rgba(255, 255, 255, 0.12);
+      --color-border-strong: rgba(255, 255, 255, 0.2);
+      
+      /* 强调色 - 蓝青渐变 */
+      --color-primary: oklch(0.65 0.18 250);
+      --color-primary-hover: oklch(0.55 0.2 250);
+      --color-accent: oklch(0.7 0.15 180);
+      --color-gradient: linear-gradient(135deg, oklch(0.65 0.18 250) 0%, oklch(0.7 0.15 180) 100%);
+      
+      /* 功能色 */
+      --color-success: oklch(0.7 0.14 150);
+      --color-warning: oklch(0.75 0.16 70);
+      --color-error: oklch(0.65 0.2 25);
+      
+      /* 字体系统 */
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      
+      /* 字体比例（1.25 modular scale） */
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.38vw, 1rem);
+      --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.63vw, 1.25rem);
+      --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+      --text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+      --text-3xl: clamp(1.875rem, 1.5rem + 1.88vw, 2.5rem);
+      --text-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3rem);
+      --text-5xl: clamp(3rem, 2.25rem + 3.75vw, 4rem);
+      
+      /* 间距系统（8px 基准） */
+      --space-1: 0.25rem;   /* 2px */
+      --space-2: 0.5rem;    /* 4px */
+      --space-3: 0.75rem;   /* 6px */
+      --space-4: 1rem;      /* 8px */
+      --space-5: 1.25rem;   /* 10px */
+      --space-6: 1.5rem;    /* 12px */
+      --space-8: 2rem;      /* 16px */
+      --space-10: 2.5rem;   /* 20px */
+      --space-12: 3rem;     /* 24px */
+      --space-16: 4rem;     /* 32px */
+      --space-20: 5rem;     /* 40px */
+      --space-24: 6rem;     /* 48px */
+      --space-32: 8rem;     /* 64px */
+      
+      /* 圆角 */
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-2xl: 1.5rem;
+      --radius-full: 9999px;
+      
+      /* 阴影 */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
+      
+      /* 动效 */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-fast: 150ms;
+      --duration-base: 250ms;
+      --duration-slow: 400ms;
+      
+      /* 布局 */
+      --container-max: 1280px;
+      --content-max: 65ch;
+      --header-height: 72px;
+    }
+
+    /* ===== 基础重置 ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      overflow-x: hidden;
+    }
+
+    /* ===== 主题切换 ===== */
+    [data-theme="light"] {
+      --color-bg: #ffffff;
+      --color-bg-alt: #f8f9fa;
+      --color-surface: rgba(255, 255, 255, 0.9);
+      --color-surface-hover: rgba(248, 249, 250, 0.95);
+      --color-text: #1a1a1a;
+      --color-text-secondary: #525252;
+      --color-text-muted: #737373;
+      --color-border: rgba(0, 0, 0, 0.12);
+      --color-border-strong: rgba(0, 0, 0, 0.2);
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.12);
+      background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.03) 0%, transparent 50%);
+    }
+
+    [data-theme="light"] .navbar {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    [data-theme="light"] .hero {
+      background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.03) 0%, transparent 50%);
+    }
+
+    [data-theme="light"] .pain-card,
+    [data-theme="light"] .solution-card,
+    [data-theme="light"] .role-card,
+    [data-theme="light"] .commitment-card,
+    [data-theme="light"] .catalog-item,
+    [data-theme="light"] .contact-card {
+      background: var(--color-bg);
+    }
+
+    [data-theme="light"] .process-number-circle {
+      background: var(--color-bg-alt);
+    }
+
+    /* ===== 工具类 ===== */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--space-8);
+    }
+
+    .content-max {
+      max-width: var(--content-max);
+    }
+
+    .gradient-text {
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-padding {
+      padding: var(--space-24) 0;
+    }
+
+    @media (max-width: 768px) {
+      .section-padding {
+        padding: var(--space-16) 0;
+      }
+    }
+
+    /* ===== 导航 ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: rgba(15, 15, 15, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--color-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-8);
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      transition: color var(--duration-fast) var(--ease-out);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    .nav-cta {
+      background: var(--color-gradient);
+      color: white;
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--header-height);
+      background: 
+        radial-gradient(ellipse at top, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .hero-kicker {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-primary);
+      margin-bottom: var(--space-6);
+    }
+
+    .hero-title {
+      font-size: var(--text-5xl);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: var(--space-6);
+    }
+
+    .hero-subtitle {
+      font-size: var(--text-xl);
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-10);
+      max-width: var(--content-max);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-full);
+      font-size: var(--text-base);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--duration-fast) var(--ease-out);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--color-gradient);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-text);
+      border: 1px solid var(--color-border-strong);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-surface);
+      border-color: var(--color-text-muted);
+    }
+
+    /* ===== Section Headers ===== */
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto var(--space-16);
+    }
+
+    .section-kicker {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-primary);
+      margin-bottom: var(--space-4);
+    }
+
+    .section-title {
+      font-size: var(--text-4xl);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: var(--space-4);
+    }
+
+    .section-desc {
+      font-size: var(--text-lg);
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ===== Pain Points ===== */
+    .pain-points {
+      background: var(--color-bg-alt);
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+
+    @media (max-width: 992px) {
+      .pain-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pain-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      transition: transform var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
+    }
+
+    .pain-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-border-strong);
+    }
+
+    .pain-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(239, 68, 68, 0.1);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: var(--space-6);
+    }
+
+    .pain-title {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .pain-desc {
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ===== Solution Cards ===== */
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+
+    @media (max-width: 992px) {
+      .solution-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .solution-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      position: relative;
+      overflow: hidden;
+      transition: all var(--duration-base) var(--ease-out);
+    }
+
+    .solution-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--color-gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    .solution-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .solution-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-border-strong);
+    }
+
+    .solution-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--color-gradient);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: var(--space-6);
+    }
+
+    .solution-title {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .solution-desc {
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-4);
+    }
+
+    .solution-feature {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .solution-feature::before {
+      content: '✓';
+      color: var(--color-success);
+      font-weight: 700;
+    }
+
+    /* ===== Service Roles ===== */
+    .roles {
+      background: var(--color-bg-alt);
+    }
+
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+
+    @media (max-width: 992px) {
+      .roles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .role-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      text-align: center;
+      transition: all var(--duration-base) var(--ease-out);
+    }
+
+    .role-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-4px);
+    }
+
+    .role-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--space-6);
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .role-title {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .role-desc {
+      color: var(--color-text-secondary);
+      font-size: var(--text-sm);
+      line-height: 1.7;
+      margin-bottom: var(--space-6);
+    }
+
+    .role-features {
+      text-align: left;
+      list-style: none;
+    }
+
+    .role-features li {
+      padding: var(--space-2) 0;
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .role-features li:last-child {
+      border-bottom: none;
+    }
+
+    /* ===== SLA Table ===== */
+    .sla-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--space-12);
+    }
+
+    .sla-table th,
+    .sla-table td {
+      padding: var(--space-6) var(--space-8);
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .sla-table th {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      background: var(--color-surface);
+    }
+
+    .sla-table td {
+      color: var(--color-text-secondary);
+    }
+
+    .sla-table tr:hover td {
+      background: var(--color-surface-hover);
+    }
+
+    .level-badge {
+      display: inline-block;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .level-a {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--color-error);
+    }
+
+    .level-b {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--color-warning);
+    }
+
+    .level-c {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--color-primary);
+    }
+
+    /* ===== Commitments ===== */
+    .commitments {
+      background: var(--color-bg-alt);
+    }
+
+    .commitments-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+
+    @media (max-width: 768px) {
+      .commitments-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .commitment-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      display: flex;
+      gap: var(--space-6);
+      transition: all var(--duration-base) var(--ease-out);
+    }
+
+    .commitment-card:hover {
+      border-color: var(--color-primary);
+      transform: translateX(4px);
+    }
+
+    .commitment-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--color-gradient);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .commitment-content h3 {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .commitment-content p {
+      color: var(--color-text-secondary);
+      font-size: var(--text-sm);
+      line-height: 1.7;
+    }
+
+    /* ===== Service Catalog ===== */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+
+    @media (max-width: 992px) {
+      .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .catalog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .catalog-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      transition: all var(--duration-fast) var(--ease-out);
+    }
+
+    .catalog-item:hover {
+      border-color: var(--color-border-strong);
+      background: var(--color-surface-hover);
+    }
+
+    .catalog-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .catalog-content h4 {
+      font-size: var(--text-base);
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+
+    .catalog-content p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== Process Steps ===== */
+    .process {
+      background: var(--color-bg-alt);
+    }
+
+    .process-timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      left: 40px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-border);
+    }
+
+    .process-step {
+      display: flex;
+      gap: var(--space-8);
+      margin-bottom: var(--space-12);
+      position: relative;
+    }
+
+    .process-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .process-number {
+      width: 80px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .process-number-circle {
+      width: 80px;
+      height: 80px;
+      background: var(--color-bg);
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .process-content {
+      flex: 1;
+      padding-top: var(--space-4);
+    }
+
+    .process-title {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .process-desc {
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ===== CTA Section ===== */
+    .cta {
+      text-align: center;
+      background: 
+        radial-gradient(ellipse at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    }
+
+    .cta-title {
+      font-size: var(--text-4xl);
+      font-weight: 700;
+      margin-bottom: var(--space-6);
+    }
+
+    .cta-desc {
+      font-size: var(--text-lg);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-10);
+      max-width: var(--content-max);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      max-width: 900px;
+      margin: 0 auto var(--space-12);
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      text-align: center;
+      transition: all var(--duration-base) var(--ease-out);
+    }
+
+    .contact-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-4px);
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-4);
+    }
+
+    .contact-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .contact-value {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .contact-value a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: var(--color-bg-alt);
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-12) 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-8);
+    }
+
+    .footer-logo {
+      font-size: var(--text-lg);
+      font-weight: 700;
+    }
+
+    .footer-logo span {
+      color: var(--color-primary);
+    }
+
+    .footer-text {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    /* ===== 动画 ===== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-in {
+      animation: fadeInUp 0.6s var(--ease-out) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-title {
+        font-size: var(--text-3xl);
+      }
+      
+      .hero-cta {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航 -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">信诺<span>ETS</span></a>
+      <ul class="nav-links">
+        <li><a href="#pain-points">痛点</a></li>
+        <li><a href="#solution">解决方案</a></li>
+        <li><a href="#roles">服务体系</a></li>
+        <li><a href="#sla">SLA 承诺</a></li>
+        <li><a href="#commitments">服务承诺</a></li>
+        <li><a href="#catalog">服务目录</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: var(--space-4);">
+        <button id="themeToggle" class="btn btn-secondary" style="padding: var(--space-2) var(--space-4); font-size: var(--text-sm);" title="切换主题">
+          <span id="themeIcon">🌙</span>
+        </button>
+        <a href="#contact" class="nav-cta">立即咨询</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-kicker animate-in">Enterprise Technical Support</p>
+        <h1 class="hero-title animate-in delay-1">
+          从<span class="gradient-text">救火</span>到<span class="gradient-text">防灾</span><br>
+          企业 IT 支持的范式升级
+        </h1>
+        <p class="hero-subtitle animate-in delay-2">
+          信诺时代 ETS（企业高级技术支持）服务，将不确定的 IT 故障支出转化为可预期的年度预算。
+          通过专属 CSM 主动预防、严格 SLA 保障、全栈专家资源，让您的业务永续运行。
+        </p>
+        <div class="hero-cta animate-in delay-3">
+          <a href="#contact" class="btn btn-primary">
+            获取服务方案
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#solution" class="btn btn-secondary">了解核心价值</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pain Points -->
+  <section id="pain-points" class="pain-points section-padding">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">传统 IT 支持的困境</p>
+        <h2 class="section-title">您是否面临这些问题？</h2>
+        <p class="section-desc">
+          传统"坏了再修"的被动式 IT 支持，让企业陷入无休止的救火循环
+        </p>
+      </div>
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-icon">🔥</div>
+          <h3 class="pain-title">被动响应，疲于救火</h3>
+          <p class="pain-desc">
+            故障发生后才联系支持，业务已遭受损失。每次都是紧急状态，团队精疲力竭。
+          </p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">💸</div>
+          <h3 class="pain-title">成本不可控</h3>
+          <p class="pain-desc">
+            按次计费或临时采购服务，年度 IT 支持支出难以预测和规划，预算超支成常态。
+          </p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon">🔍</div>
+          <h3 class="pain-title">找不到对的人</h3>
+          <p class="pain-desc">
+            复杂问题需要不同供应商的专家，协调成本高，责任推诿，问题解决周期长。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution -->
+  <section id="solution" class="solution section-padding">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">ETS 核心价值</p>
+        <h2 class="section-title">重新定义企业 IT 支持</h2>
+        <p class="section-desc">
+          订阅制服务包模式，从被动响应转向主动预防，让 IT 支持成为业务增长的助力
+        </p>
+      </div>
+      <div class="solution-grid">
+        <div class="solution-card">
+          <div class="solution-icon">🛡️</div>
+          <h3 class="solution-title">业务永续保障</h3>
+          <p class="solution-desc">
+            严格的 SLA 承诺和 7×24 小时响应机制，确保关键业务问题得到最高优先级处理
+          </p>
+          <div class="solution-feature">Level A 事件 1 小时内响应</div>
+          <div class="solution-feature">7×24 小时紧急通道</div>
+          <div class="solution-feature">北京 2 小时现场抵达</div>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">🔍</div>
+          <h3 class="solution-title">主动预防机制</h3>
+          <p class="solution-desc">
+            专属 CSM 定期进行健康检查、风险评估和技术规划，防患于未然
+          </p>
+          <div class="solution-feature">月度/季度健康检查</div>
+          <div class="solution-feature">年度 IT 规划咨询</div>
+          <div class="solution-feature">重大变更护航</div>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">💰</div>
+          <h3 class="solution-title">成本清晰可控</h3>
+          <p class="solution-desc">
+            预付费服务包模式，年度 IT 支持成本清晰可预期，高效利用每一服务小时
+          </p>
+          <div class="solution-feature">预付费包干模式</div>
+          <div class="solution-feature">工时透明可查</div>
+          <div class="solution-feature">续约小时数结转</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roles -->
+  <section id="roles" class="roles section-padding">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">三级支持体系</p>
+        <h2 class="section-title">专业服务角色</h2>
+        <p class="section-desc">
+          从统一入口到专家攻关，每一层都有明确职责和能力标准
+        </p>
+      </div>
+      <div class="roles-grid">
+        <div class="role-card">
+          <div class="role-icon">📞</div>
+          <h3 class="role-title">服务台</h3>
+          <p class="role-desc">统一入口，全程跟踪</p>
+          <ul class="role-features">
+            <li>电话/邮件/企业微信/ITSM</li>
+            <li>工单创建与分派</li>
+            <li>法定工作日 9:00-18:00</li>
+            <li>7×24 紧急通道（Level A）</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <div class="role-icon">👤</div>
+          <h3 class="role-title">客户成功经理</h3>
+          <p class="role-desc">您的专属技术伙伴</p>
+          <ul class="role-features">
+            <li>ITIL 4/PMP 认证，5 年 + 经验</li>
+            <li>服务启动与健康检查</li>
+            <li>资源协调与升级</li>
+            <li>季度服务回顾会议</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <div class="role-icon">🔧</div>
+          <h3 class="role-title">技术支持工程师</h3>
+          <p class="role-desc">三级专家梯队</p>
+          <ul class="role-features">
+            <li>一线：快速诊断修复</li>
+            <li>二线：复杂问题处理</li>
+            <li>三线：架构级专家攻关</li>
+            <li>50+ 同类案例经验</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLA -->
+  <section id="sla" class="sla section-padding">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">服务等级协议</p>
+        <h2 class="section-title">明确的 SLA 承诺</h2>
+        <p class="section-desc">
+          不同事件等级对应不同的响应时效和支持时间，确保资源精准投入
+        </p>
+      </div>
+      <table class="sla-table">
+        <thead>
+          <tr>
+            <th>事件等级</th>
+            <th>业务影响</th>
+            <th>支持时间</th>
+            <th>首次响应</th>
+            <th>服务系数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="level-badge level-a">Level A</span></td>
+            <td>核心业务完全受损，需立即解决</td>
+            <td>7×24 小时</td>
+            <td>≤1 小时</td>
+            <td>1.5 - 2.5</td>
+          </tr>
+          <tr>
+            <td><span class="level-badge level-b">Level B</span></td>
+            <td>业务一般影响，工作仍可继续</td>
+            <td>5×8 工作日</td>
+            <td>≤2 小时</td>
+            <td>1.0</td>
+          </tr>
+          <tr>
+            <td><span class="level-badge level-c">Level C</span></td>
+            <td>预约式/主动式服务（健康检查、咨询）</td>
+            <td>5×8 工作日</td>
+            <td>≤8 小时</td>
+            <td>1.0</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top: var(--space-6); color: var(--color-text-muted); font-size: var(--text-sm);">
+        * 服务系数：工作时间 1.0 | 非工作时间（工作日 18:00-次日 9:00、周末）2.0 | 法定节假日 2.5
+      </p>
+    </div>
+  </section>
+
+  <!-- Commitments -->
+  <section id="commitments" class="commitments section-padding">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">五大服务承诺</p>
+        <h2 class="section-title">您的权益保障</h2>
+        <p class="section-desc">
+          基于透明、负责、安全原则，我们郑重作出以下承诺
+        </p>
+      </div>
+      <div class="commitments-grid">
+        <div class="commitment-card">
+          <div class="commitment-icon">📊</div>
+          <div class="commitment-content">
+            <h3>透明计费，随时可查</h3>
+            <p>系统自动记录工时，无人工干预。随时登录 ITSM 系统查看每一笔消耗明细，支持导出审计。</p>
+          </div>
+        </div>
+        <div class="commitment-card">
+          <div class="commitment-icon">⬆️</div>
+          <div class="commitment-content">
+            <h3>服务不满，无理由升级</h3>
+            <p>无需额外条件，随时联系 CSM 或通过系统要求升级。高层负责人介入，48 小时内出具解决方案。</p>
+          </div>
+        </div>
+        <div class="commitment-card">
+          <div class="commitment-icon">🔒</div>
+          <div class="commitment-content">
+            <h3>数据安全，操作可控</h3>
+            <p>远程操作需明确授权，系统自动留存完整日志。严格遵守数据安全法规，绝不泄露业务数据。</p>
+          </div>
+        </div>
+        <div class="commitment-card">
+          <div class="commitment-icon">🔄</div>
+          <div class="commitment-content">
+            <h3>服务延续，无缝衔接</h3>
+            <p>合同到期前 30 天 CSM 主动对接续约。若终止合作，协助制定平滑迁移计划，确保无断层。</p>
+          </div>
+        </div>
+        <div class="commitment-card" style="grid-column: span 2;">
+          <div class="commitment-icon">💯</div>
+          <div class="commitment-content">
+            <h3>首月保障，不满意可退款</h3>
+            <p>合同生效后首 30 天内，若对服务质量不满意，可申请未使用小时数按比例退款。5 个工作日审核，10 个工作日原路返还。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog -->
+  <section id="catalog" class="catalog section-padding">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">全栈技术覆盖</p>
+        <h2 class="section-title">服务目录</h2>
+        <p class="section-desc">
+          六大类服务，覆盖数百款主流产品与平台
+        </p>
+      </div>
+      <div class="catalog-grid">
+        <div class="catalog-item">
+          <div class="catalog-icon">🏥</div>
+          <div class="catalog-content">
+            <h4>健康检查服务</h4>
+            <p>微软 AD/Exchange/SQL、VMware、深信服超融合、备份系统等主动巡检</p>
+          </div>
+        </div>
+        <div class="catalog-item">
+          <div class="catalog-icon">🚨</div>
+          <div class="catalog-content">
+            <h4>被动响应与故障处理</h4>
+            <p>7×24 小时应急支持，Windows Server、Linux、公有云、安全产品等</p>
+          </div>
+        </div>
+        <div class="catalog-item">
+          <div class="catalog-icon">⚡</div>
+          <div class="catalog-content">
+            <h4>主动优化与实施</h4>
+            <p>Office 365 迁移、Teams 配置、NSX 网络虚拟化、vSAN 存储架构</p>
+          </div>
+        </div>
+        <div class="catalog-item">
+          <div class="catalog-icon">🛡️</div>
+          <div class="catalog-content">
+            <h4>安全专项服务</h4>
+            <p>渗透测试、漏洞扫描、等保咨询、EDR/SOC 运营、零信任架构设计</p>
+          </div>
+        </div>
+        <div class="catalog-item">
+          <div class="catalog-icon">☁️</div>
+          <div class="catalog-content">
+            <h4>云与自动化服务</h4>
+            <p>Zabbix/Prometheus 监控、Ansible 自动化、ELK 日志分析、公有云 MSP</p>
+          </div>
+        </div>
+        <div class="catalog-item">
+          <div class="catalog-icon">🎓</div>
+          <div class="catalog-content">
+            <h4>培训与认证服务</h4>
+            <p>ITIL 4、PMP、CISP、CISSP、信创专项、Adobe 创意软件等权威认证</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="process section-padding">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">标准化启动流程</p>
+        <h2 class="section-title">服务启动流程</h2>
+        <p class="section-desc">
+          全环节标准化，明确各阶段责任与时间节点
+        </p>
+      </div>
+      <div class="process-timeline">
+        <div class="process-step">
+          <div class="process-number">
+            <div class="process-number-circle">1</div>
+          </div>
+          <div class="process-content">
+            <h3 class="process-title">合同生效 T+1 工作日</h3>
+            <p class="process-desc">信诺 e 服运营中心开通 ITSM 系统基础服务权限</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-number">
+            <div class="process-number-circle">2</div>
+          </div>
+          <div class="process-content">
+            <h3 class="process-title">合同生效 T+3 工作日</h3>
+            <p class="process-desc">发送系统登录账号、初始密码、《系统使用操作指南》</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-number">
+            <div class="process-number-circle">3</div>
+          </div>
+          <div class="process-content">
+            <h3 class="process-title">合同生效 T+5 工作日</h3>
+            <p class="process-desc">CSM 组织首次启动会议，明确服务范围、响应标准、双方对接人</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-number">
+            <div class="process-number-circle">4</div>
+          </div>
+          <div class="process-content">
+            <h3 class="process-title">启动会议后 2 日内</h3>
+            <p class="process-desc">确认客户侧关键联系人，完成系统角色权限配置</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-number">
+            <div class="process-number-circle">5</div>
+          </div>
+          <div class="process-content">
+            <h3 class="process-title">服务启动后 15 日内（可选）</h3>
+            <p class="process-desc">提供免费系统健康检查，输出《健康检查报告》及优化建议</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" class="cta section-padding">
+    <div class="container">
+      <h2 class="cta-title">准备好升级您的 IT 支持体验了吗？</h2>
+      <p class="cta-desc">
+        与专属 CSM 沟通，定制适合您企业的 ETS 服务方案。首月不满意可按比例退款，零风险体验。
+      </p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon">📞</div>
+          <div class="contact-label">服务热线</div>
+          <div class="contact-value">400-654-0119</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">🌐</div>
+          <div class="contact-label">ITSM 系统</div>
+          <div class="contact-value"><a href="https://support.sinoage.com" target="_blank">support.sinoage.com</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📧</div>
+          <div class="contact-label">投诉升级</div>
+          <div class="contact-value"><a href="mailto:chenjy@sinoage.com">chenjy@sinoage.com</a></div>
+        </div>
+      </div>
+      <a href="tel:400-654-0119" class="btn btn-primary">
+        立即拨打热线
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">信诺<span>ETS</span></div>
+        <p class="footer-text">© 2025 信诺时代科技发展有限公司。All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== 主题切换 =====
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    // 读取保存的主题偏好
+    const savedTheme = localStorage.getItem('ets-theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('ets-theme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    function updateThemeIcon(theme) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    // ===== 平滑滚动优化 =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // ===== 滚动动画（Intersection Observer）=====
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.pain-card, .solution-card, .role-card, .commitment-card, .catalog-item, .process-step').forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
