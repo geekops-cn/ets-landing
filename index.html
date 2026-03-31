@@ -121,7 +121,7 @@
       --color-surface-hover: rgba(248, 249, 250, 0.95);
       --color-text: #1a1a1a;
       --color-text-secondary: #525252;
-      --color-text-muted: #737373;
+      --color-text-muted: #525252;
       --color-border: rgba(0, 0, 0, 0.12);
       --color-border-strong: rgba(0, 0, 0, 0.2);
       --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -130,6 +130,40 @@
       --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.12);
       background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
                   radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.03) 0%, transparent 50%);
+    }
+
+    /* ===== 无障碍 Focus 状态 ===== */
+    .btn:focus-visible,
+    .nav-cta:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    /* ===== 尊重 prefers-reduced-motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* ===== 屏幕阅读器专用文本 ===== */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     [data-theme="light"] .navbar {
@@ -583,9 +617,8 @@
     }
 
     .sla-table th {
-      font-size: var(--text-sm);
+      font-size: var(--text-base);
       font-weight: 600;
-      text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--color-text-muted);
       background: var(--color-surface);
@@ -923,13 +956,11 @@
     .delay-4 { animation-delay: 0.4s; }
 
     /* ===== 响应式 ===== */
-    @media (max-width: 992px) {
+    @media (max-width: 768px) {
       .nav-links {
         display: none;
       }
-    }
-
-    @media (max-width: 576px) {
+      
       .hero-title {
         font-size: var(--text-3xl);
       }
@@ -941,6 +972,30 @@
       .btn {
         width: 100%;
         justify-content: center;
+      }
+      
+      .commitments-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .commitment-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .commitment-icon {
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-title {
+        word-break: break-word;
+      }
+      
+      .section-title {
+        font-size: var(--text-2xl);
       }
     }
   </style>
@@ -1005,21 +1060,21 @@
       </div>
       <div class="pain-grid">
         <div class="pain-card">
-          <div class="pain-icon">🔥</div>
+          <div class="pain-icon" aria-hidden="true">🔥</div>
           <h3 class="pain-title">被动响应，疲于救火</h3>
           <p class="pain-desc">
             故障发生后才联系支持，业务已遭受损失。每次都是紧急状态，团队精疲力竭。
           </p>
         </div>
         <div class="pain-card">
-          <div class="pain-icon">💸</div>
+          <div class="pain-icon" aria-hidden="true">💸</div>
           <h3 class="pain-title">成本不可控</h3>
           <p class="pain-desc">
             按次计费或临时采购服务，年度 IT 支持支出难以预测和规划，预算超支成常态。
           </p>
         </div>
         <div class="pain-card">
-          <div class="pain-icon">🔍</div>
+          <div class="pain-icon" aria-hidden="true">🔍</div>
           <h3 class="pain-title">找不到对的人</h3>
           <p class="pain-desc">
             复杂问题需要不同供应商的专家，协调成本高，责任推诿，问题解决周期长。
@@ -1041,7 +1096,7 @@
       </div>
       <div class="solution-grid">
         <div class="solution-card">
-          <div class="solution-icon">🛡️</div>
+          <div class="solution-icon" aria-hidden="true">🛡️</div>
           <h3 class="solution-title">业务永续保障</h3>
           <p class="solution-desc">
             严格的 SLA 承诺和 7×24 小时响应机制，确保关键业务问题得到最高优先级处理
@@ -1051,7 +1106,7 @@
           <div class="solution-feature">北京 2 小时现场抵达</div>
         </div>
         <div class="solution-card">
-          <div class="solution-icon">🔍</div>
+          <div class="solution-icon" aria-hidden="true">🔍</div>
           <h3 class="solution-title">主动预防机制</h3>
           <p class="solution-desc">
             专属 CSM 定期进行健康检查、风险评估和技术规划，防患于未然
@@ -1061,7 +1116,7 @@
           <div class="solution-feature">重大变更护航</div>
         </div>
         <div class="solution-card">
-          <div class="solution-icon">💰</div>
+          <div class="solution-icon" aria-hidden="true">💰</div>
           <h3 class="solution-title">成本清晰可控</h3>
           <p class="solution-desc">
             预付费服务包模式，年度 IT 支持成本清晰可预期，高效利用每一服务小时
@@ -1086,7 +1141,7 @@
       </div>
       <div class="roles-grid">
         <div class="role-card">
-          <div class="role-icon">📞</div>
+          <div class="role-icon" aria-hidden="true">📞</div>
           <h3 class="role-title">服务台</h3>
           <p class="role-desc">统一入口，全程跟踪</p>
           <ul class="role-features">
@@ -1097,7 +1152,7 @@
           </ul>
         </div>
         <div class="role-card">
-          <div class="role-icon">👤</div>
+          <div class="role-icon" aria-hidden="true">👤</div>
           <h3 class="role-title">客户成功经理</h3>
           <p class="role-desc">您的专属技术伙伴</p>
           <ul class="role-features">
@@ -1108,7 +1163,7 @@
           </ul>
         </div>
         <div class="role-card">
-          <div class="role-icon">🔧</div>
+          <div class="role-icon" aria-hidden="true">🔧</div>
           <h3 class="role-title">技术支持工程师</h3>
           <p class="role-desc">三级专家梯队</p>
           <ul class="role-features">
@@ -1184,35 +1239,35 @@
       </div>
       <div class="commitments-grid">
         <div class="commitment-card">
-          <div class="commitment-icon">📊</div>
+          <div class="commitment-icon" aria-hidden="true">📊</div>
           <div class="commitment-content">
             <h3>透明计费，随时可查</h3>
             <p>系统自动记录工时，无人工干预。随时登录 ITSM 系统查看每一笔消耗明细，支持导出审计。</p>
           </div>
         </div>
         <div class="commitment-card">
-          <div class="commitment-icon">⬆️</div>
+          <div class="commitment-icon" aria-hidden="true">⬆️</div>
           <div class="commitment-content">
             <h3>服务不满，无理由升级</h3>
             <p>无需额外条件，随时联系 CSM 或通过系统要求升级。高层负责人介入，48 小时内出具解决方案。</p>
           </div>
         </div>
         <div class="commitment-card">
-          <div class="commitment-icon">🔒</div>
+          <div class="commitment-icon" aria-hidden="true">🔒</div>
           <div class="commitment-content">
             <h3>数据安全，操作可控</h3>
             <p>远程操作需明确授权，系统自动留存完整日志。严格遵守数据安全法规，绝不泄露业务数据。</p>
           </div>
         </div>
         <div class="commitment-card">
-          <div class="commitment-icon">🔄</div>
+          <div class="commitment-icon" aria-hidden="true">🔄</div>
           <div class="commitment-content">
             <h3>服务延续，无缝衔接</h3>
             <p>合同到期前 30 天 CSM 主动对接续约。若终止合作，协助制定平滑迁移计划，确保无断层。</p>
           </div>
         </div>
         <div class="commitment-card" style="grid-column: span 2;">
-          <div class="commitment-icon">💯</div>
+          <div class="commitment-icon" aria-hidden="true">💯</div>
           <div class="commitment-content">
             <h3>首月保障，不满意可退款</h3>
             <p>合同生效后首 30 天内，若对服务质量不满意，可申请未使用小时数按比例退款。5 个工作日审核，10 个工作日原路返还。</p>
@@ -1234,42 +1289,42 @@
       </div>
       <div class="catalog-grid">
         <div class="catalog-item">
-          <div class="catalog-icon">🏥</div>
+          <div class="catalog-icon" aria-hidden="true">🏥</div>
           <div class="catalog-content">
             <h4>健康检查服务</h4>
             <p>微软 AD/Exchange/SQL、VMware、深信服超融合、备份系统等主动巡检</p>
           </div>
         </div>
         <div class="catalog-item">
-          <div class="catalog-icon">🚨</div>
+          <div class="catalog-icon" aria-hidden="true">🚨</div>
           <div class="catalog-content">
             <h4>被动响应与故障处理</h4>
             <p>7×24 小时应急支持，Windows Server、Linux、公有云、安全产品等</p>
           </div>
         </div>
         <div class="catalog-item">
-          <div class="catalog-icon">⚡</div>
+          <div class="catalog-icon" aria-hidden="true">⚡</div>
           <div class="catalog-content">
             <h4>主动优化与实施</h4>
             <p>Office 365 迁移、Teams 配置、NSX 网络虚拟化、vSAN 存储架构</p>
           </div>
         </div>
         <div class="catalog-item">
-          <div class="catalog-icon">🛡️</div>
+          <div class="catalog-icon" aria-hidden="true">🛡️</div>
           <div class="catalog-content">
             <h4>安全专项服务</h4>
             <p>渗透测试、漏洞扫描、等保咨询、EDR/SOC 运营、零信任架构设计</p>
           </div>
         </div>
         <div class="catalog-item">
-          <div class="catalog-icon">☁️</div>
+          <div class="catalog-icon" aria-hidden="true">☁️</div>
           <div class="catalog-content">
             <h4>云与自动化服务</h4>
             <p>Zabbix/Prometheus 监控、Ansible 自动化、ELK 日志分析、公有云 MSP</p>
           </div>
         </div>
         <div class="catalog-item">
-          <div class="catalog-icon">🎓</div>
+          <div class="catalog-icon" aria-hidden="true">🎓</div>
           <div class="catalog-content">
             <h4>培训与认证服务</h4>
             <p>ITIL 4、PMP、CISP、CISSP、信创专项、Adobe 创意软件等权威认证</p>
@@ -1348,17 +1403,17 @@
       </p>
       <div class="contact-grid">
         <div class="contact-card">
-          <div class="contact-icon">📞</div>
+          <div class="contact-icon" aria-hidden="true">📞</div>
           <div class="contact-label">服务热线</div>
           <div class="contact-value">400-654-0119</div>
         </div>
         <div class="contact-card">
-          <div class="contact-icon">🌐</div>
+          <div class="contact-icon" aria-hidden="true">🌐</div>
           <div class="contact-label">ITSM 系统</div>
-          <div class="contact-value"><a href="https://support.sinoage.com" target="_blank">support.sinoage.com</a></div>
+          <div class="contact-value"><a href="https://support.sinoage.com" target="_blank" rel="noopener noreferrer">support.sinoage.com</a></div>
         </div>
         <div class="contact-card">
-          <div class="contact-icon">📧</div>
+          <div class="contact-icon" aria-hidden="true">📧</div>
           <div class="contact-label">投诉升级</div>
           <div class="contact-value"><a href="mailto:chenjy@sinoage.com">chenjy@sinoage.com</a></div>
         </div>
