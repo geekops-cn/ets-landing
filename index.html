@@ -180,7 +180,9 @@
     [data-theme="light"] .role-card,
     [data-theme="light"] .commitment-card,
     [data-theme="light"] .catalog-item,
-    [data-theme="light"] .contact-card {
+    [data-theme="light"] .contact-card,
+    [data-theme="light"] .stat-card,
+    [data-theme="light"] .comparison-card {
       background: var(--color-bg);
     }
 
@@ -323,6 +325,31 @@
       max-width: var(--content-max);
     }
 
+    .hero-metric {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-4);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      padding: var(--space-3) var(--space-6);
+      margin-bottom: var(--space-8);
+    }
+
+    .hero-metric-value {
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-metric-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
     .hero-cta {
       display: flex;
       gap: var(--space-4);
@@ -393,6 +420,65 @@
       line-height: 1.7;
     }
 
+    /* ===== Stats Section ===== */
+    .stats {
+      background: var(--color-bg-alt);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-8);
+    }
+
+    @media (max-width: 992px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      text-align: center;
+      transition: all var(--duration-base) var(--ease-out);
+    }
+
+    .stat-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-4px);
+    }
+
+    .stat-value {
+      font-size: var(--text-4xl);
+      font-weight: 700;
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--space-2);
+    }
+
+    .stat-label {
+      font-size: var(--text-base);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-4);
+    }
+
+    .stat-desc {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
     /* ===== Pain Points ===== */
     .pain-points {
       background: var(--color-bg-alt);
@@ -444,6 +530,19 @@
     .pain-desc {
       color: var(--color-text-secondary);
       line-height: 1.7;
+    }
+
+    .pain-stat {
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-border);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .pain-stat strong {
+      color: var(--color-error);
+      font-weight: 600;
     }
 
     /* ===== Solution Cards ===== */
@@ -530,76 +629,73 @@
       font-weight: 700;
     }
 
-    /* ===== Service Roles ===== */
-    .roles {
+    /* ===== Comparison Table ===== */
+    .comparison {
       background: var(--color-bg-alt);
     }
 
-    .roles-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-8);
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--space-12);
     }
 
-    @media (max-width: 992px) {
-      .roles-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .role-card {
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-xl);
-      padding: var(--space-8);
-      text-align: center;
-      transition: all var(--duration-base) var(--ease-out);
-    }
-
-    .role-card:hover {
-      border-color: var(--color-primary);
-      transform: translateY(-4px);
-    }
-
-    .role-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto var(--space-6);
-      background: rgba(59, 130, 246, 0.1);
-      border-radius: var(--radius-full);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-    }
-
-    .role-title {
-      font-size: var(--text-xl);
-      font-weight: 600;
-      margin-bottom: var(--space-3);
-    }
-
-    .role-desc {
-      color: var(--color-text-secondary);
-      font-size: var(--text-sm);
-      line-height: 1.7;
-      margin-bottom: var(--space-6);
-    }
-
-    .role-features {
+    .comparison-table th,
+    .comparison-table td {
+      padding: var(--space-6) var(--space-8);
       text-align: left;
-      list-style: none;
-    }
-
-    .role-features li {
-      padding: var(--space-2) 0;
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
       border-bottom: 1px solid var(--color-border);
     }
 
-    .role-features li:last-child {
-      border-bottom: none;
+    .comparison-table th {
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      background: var(--color-surface);
+    }
+
+    .comparison-table th:first-child {
+      border-radius: var(--radius-lg) 0 0 0;
+    }
+
+    .comparison-table th:last-child {
+      border-radius: 0 var(--radius-lg) 0 0;
+    }
+
+    .comparison-table td {
+      color: var(--color-text-secondary);
+    }
+
+    .comparison-table tr:hover td {
+      background: var(--color-surface-hover);
+    }
+
+    .comparison-table tr:first-child td {
+      padding-top: var(--space-8);
+    }
+
+    .ets-column {
+      background: rgba(59, 130, 246, 0.08);
+      border-left: 2px solid var(--color-primary);
+      border-right: 2px solid var(--color-primary);
+    }
+
+    .ets-header {
+      background: rgba(59, 130, 246, 0.15) !important;
+      color: var(--color-primary) !important;
+      font-weight: 700;
+    }
+
+    .check-icon {
+      color: var(--color-success);
+      font-weight: 700;
+      font-size: var(--text-lg);
+    }
+
+    .cross-icon {
+      color: var(--color-error);
+      font-weight: 700;
+      font-size: var(--text-lg);
     }
 
     /* ===== SLA Table ===== */
@@ -712,127 +808,6 @@
       line-height: 1.7;
     }
 
-    /* ===== Service Catalog ===== */
-    .catalog-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-6);
-    }
-
-    @media (max-width: 992px) {
-      .catalog-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 576px) {
-      .catalog-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .catalog-item {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-6);
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-4);
-      transition: all var(--duration-fast) var(--ease-out);
-    }
-
-    .catalog-item:hover {
-      border-color: var(--color-border-strong);
-      background: var(--color-surface-hover);
-    }
-
-    .catalog-icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-
-    .catalog-content h4 {
-      font-size: var(--text-base);
-      font-weight: 600;
-      margin-bottom: var(--space-1);
-    }
-
-    .catalog-content p {
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
-      line-height: 1.6;
-    }
-
-    /* ===== Process Steps ===== */
-    .process {
-      background: var(--color-bg-alt);
-    }
-
-    .process-timeline {
-      position: relative;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .process-timeline::before {
-      content: '';
-      position: absolute;
-      left: 40px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--color-border);
-    }
-
-    .process-step {
-      display: flex;
-      gap: var(--space-8);
-      margin-bottom: var(--space-12);
-      position: relative;
-    }
-
-    .process-step:last-child {
-      margin-bottom: 0;
-    }
-
-    .process-number {
-      width: 80px;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    .process-number-circle {
-      width: 80px;
-      height: 80px;
-      background: var(--color-bg);
-      border: 2px solid var(--color-primary);
-      border-radius: var(--radius-full);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: var(--text-2xl);
-      font-weight: 700;
-      color: var(--color-primary);
-    }
-
-    .process-content {
-      flex: 1;
-      padding-top: var(--space-4);
-    }
-
-    .process-title {
-      font-size: var(--text-xl);
-      font-weight: 600;
-      margin-bottom: var(--space-2);
-    }
-
-    .process-desc {
-      color: var(--color-text-secondary);
-      line-height: 1.7;
-    }
-
     /* ===== CTA Section ===== */
     .cta {
       text-align: center;
@@ -903,6 +878,18 @@
     .contact-value a {
       color: var(--color-primary);
       text-decoration: none;
+    }
+
+    .refund-note {
+      max-width: 600px;
+      margin: var(--space-8) auto 0;
+      padding: var(--space-6);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.7;
     }
 
     /* ===== Footer ===== */
@@ -987,6 +974,15 @@
       .commitment-icon {
         margin: 0 auto;
       }
+      
+      .comparison-table {
+        font-size: var(--text-sm);
+      }
+      
+      .comparison-table th,
+      .comparison-table td {
+        padding: var(--space-4);
+      }
     }
 
     @media (max-width: 576px) {
@@ -997,6 +993,15 @@
       .section-title {
         font-size: var(--text-2xl);
       }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .pain-grid,
+      .solution-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -1006,12 +1011,12 @@
     <div class="container">
       <a href="#" class="logo">信诺<span>ETS</span></a>
       <ul class="nav-links">
+        <li><a href="#stats">客户数据</a></li>
         <li><a href="#pain-points">痛点</a></li>
         <li><a href="#solution">解决方案</a></li>
-        <li><a href="#roles">服务体系</a></li>
-        <li><a href="#sla">SLA 承诺</a></li>
-        <li><a href="#commitments">服务承诺</a></li>
-        <li><a href="#catalog">服务目录</a></li>
+        <li><a href="#comparison">对比</a></li>
+        <li><a href="#sla">SLA</a></li>
+        <li><a href="#commitments">承诺</a></li>
       </ul>
       <div style="display: flex; align-items: center; gap: var(--space-4);">
         <button id="themeToggle" class="btn btn-secondary" style="padding: var(--space-2) var(--space-4); font-size: var(--text-sm);" title="切换主题">
@@ -1031,6 +1036,10 @@
           从<span class="gradient-text">救火</span>到<span class="gradient-text">防灾</span><br>
           企业 IT 支持的范式升级
         </h1>
+        <div class="hero-metric animate-in delay-2">
+          <span class="hero-metric-value">减少 80%</span>
+          <span class="hero-metric-label">业务中断时间</span>
+        </div>
         <p class="hero-subtitle animate-in delay-2">
           信诺时代 ETS（企业高级技术支持）服务，将不确定的 IT 故障支出转化为可预期的年度预算。
           通过专属 CSM 主动预防、严格 SLA 保障、全栈专家资源，让您的业务永续运行。
@@ -1048,6 +1057,41 @@
     </div>
   </section>
 
+  <!-- Stats Section -->
+  <section id="stats" class="stats section-padding">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">客户信任</p>
+        <h2 class="section-title">已服务 50+ 企业客户</h2>
+        <p class="section-desc">
+          覆盖金融、制造、科技、医疗等多个行业，累计处理 10,000+ 技术工单
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card animate-in">
+          <div class="stat-value">99.9%</div>
+          <div class="stat-label">问题解决率</div>
+          <div class="stat-desc">累计处理工单闭环率</div>
+        </div>
+        <div class="stat-card animate-in delay-1">
+          <div class="stat-value">45 分钟</div>
+          <div class="stat-label">平均响应时间</div>
+          <div class="stat-desc">Level A 事件首次响应</div>
+        </div>
+        <div class="stat-card animate-in delay-2">
+          <div class="stat-value">35%</div>
+          <div class="stat-label">成本节省</div>
+          <div class="stat-desc">客户平均年度 IT 支持成本降低</div>
+        </div>
+        <div class="stat-card animate-in delay-3">
+          <div class="stat-value">70%</div>
+          <div class="stat-label">宕机减少</div>
+          <div class="stat-desc">主动预防带来的业务中断下降</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Pain Points -->
   <section id="pain-points" class="pain-points section-padding">
     <div class="container">
@@ -1055,7 +1099,7 @@
         <p class="section-kicker">传统 IT 支持的困境</p>
         <h2 class="section-title">您是否面临这些问题？</h2>
         <p class="section-desc">
-          传统"坏了再修"的被动式 IT 支持，让企业陷入无休止的救火循环
+          基于对 100+ 企业 IT 负责人的访谈，我们发现了三大核心痛点
         </p>
       </div>
       <div class="pain-grid">
@@ -1065,6 +1109,9 @@
           <p class="pain-desc">
             故障发生后才联系支持，业务已遭受损失。每次都是紧急状态，团队精疲力竭。
           </p>
+          <div class="pain-stat">
+            <strong>73%</strong> 的 IT 经理表示响应太慢导致业务损失
+          </div>
         </div>
         <div class="pain-card">
           <div class="pain-icon" aria-hidden="true">💸</div>
@@ -1072,6 +1119,9 @@
           <p class="pain-desc">
             按次计费或临时采购服务，年度 IT 支持支出难以预测和规划，预算超支成常态。
           </p>
+          <div class="pain-stat">
+            <strong>35%</strong> 客户平均 IT 支持预算超支
+          </div>
         </div>
         <div class="pain-card">
           <div class="pain-icon" aria-hidden="true">🔍</div>
@@ -1079,6 +1129,9 @@
           <p class="pain-desc">
             复杂问题需要不同供应商的专家，协调成本高，责任推诿，问题解决周期长。
           </p>
+          <div class="pain-stat">
+            复杂问题平均需要联系 <strong>3 家</strong> 供应商，耗时 <strong>2-3 天</strong>
+          </div>
         </div>
       </div>
     </div>
@@ -1129,51 +1182,64 @@
     </div>
   </section>
 
-  <!-- Roles -->
-  <section id="roles" class="roles section-padding">
+  <!-- Comparison -->
+  <section id="comparison" class="comparison section-padding">
     <div class="container">
       <div class="section-header">
-        <p class="section-kicker">三级支持体系</p>
-        <h2 class="section-title">专业服务角色</h2>
+        <p class="section-kicker">竞争差异化</p>
+        <h2 class="section-title">为什么选择 ETS？</h2>
         <p class="section-desc">
-          从统一入口到专家攻关，每一层都有明确职责和能力标准
+          与传统 IT 外包和自建团队相比，ETS 提供更高的性价比和更可靠的服务保障
         </p>
       </div>
-      <div class="roles-grid">
-        <div class="role-card">
-          <div class="role-icon" aria-hidden="true">📞</div>
-          <h3 class="role-title">服务台</h3>
-          <p class="role-desc">统一入口，全程跟踪</p>
-          <ul class="role-features">
-            <li>电话/邮件/企业微信/ITSM</li>
-            <li>工单创建与分派</li>
-            <li>法定工作日 9:00-18:00</li>
-            <li>7×24 紧急通道（Level A）</li>
-          </ul>
-        </div>
-        <div class="role-card">
-          <div class="role-icon" aria-hidden="true">👤</div>
-          <h3 class="role-title">客户成功经理</h3>
-          <p class="role-desc">您的专属技术伙伴</p>
-          <ul class="role-features">
-            <li>ITIL 4/PMP 认证，5 年 + 经验</li>
-            <li>服务启动与健康检查</li>
-            <li>资源协调与升级</li>
-            <li>季度服务回顾会议</li>
-          </ul>
-        </div>
-        <div class="role-card">
-          <div class="role-icon" aria-hidden="true">🔧</div>
-          <h3 class="role-title">技术支持工程师</h3>
-          <p class="role-desc">三级专家梯队</p>
-          <ul class="role-features">
-            <li>一线：快速诊断修复</li>
-            <li>二线：复杂问题处理</li>
-            <li>三线：架构级专家攻关</li>
-            <li>50+ 同类案例经验</li>
-          </ul>
-        </div>
-      </div>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>对比维度</th>
+            <th class="ets-header">信诺 ETS</th>
+            <th>传统 IT 外包</th>
+            <th>自建 IT 团队</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>响应 SLA</strong></td>
+            <td class="ets-column"><span class="check-icon" aria-hidden="true">✓</span> 1 小时</td>
+            <td><span class="cross-icon" aria-hidden="true">✗</span> 4-8 小时</td>
+            <td>依赖值班安排</td>
+          </tr>
+          <tr>
+            <td><strong>年度成本</strong></td>
+            <td class="ets-column"><span class="check-icon" aria-hidden="true">✓</span> 固定预算</td>
+            <td><span class="cross-icon" aria-hidden="true">✗</span> 按次累计</td>
+            <td>人力 + 培训成本高</td>
+          </tr>
+          <tr>
+            <td><strong>专家资源</strong></td>
+            <td class="ets-column"><span class="check-icon" aria-hidden="true">✓</span> 全栈覆盖</td>
+            <td><span class="cross-icon" aria-hidden="true">✗</span> 单领域</td>
+            <td>招聘难度大</td>
+          </tr>
+          <tr>
+            <td><strong>主动预防</strong></td>
+            <td class="ets-column"><span class="check-icon" aria-hidden="true">✓</span> 定期健康检查</td>
+            <td><span class="cross-icon" aria-hidden="true">✗</span> 被动响应</td>
+            <td>视团队能力而定</td>
+          </tr>
+          <tr>
+            <td><strong>服务透明度</strong></td>
+            <td class="ets-column"><span class="check-icon" aria-hidden="true">✓</span> 系统实时可查</td>
+            <td><span class="cross-icon" aria-hidden="true">✗</span> 不透明</td>
+            <td>内部管理</td>
+          </tr>
+          <tr>
+            <td><strong>首月保障</strong></td>
+            <td class="ets-column"><span class="check-icon" aria-hidden="true">✓</span> 不满意可退款</td>
+            <td><span class="cross-icon" aria-hidden="true">✗</span> 无</td>
+            <td>沉没成本高</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
@@ -1270,126 +1336,17 @@
           <div class="commitment-icon" aria-hidden="true">💯</div>
           <div class="commitment-content">
             <h3>首月保障，不满意可退款</h3>
-            <p>合同生效后首 30 天内，若对服务质量不满意，可申请未使用小时数按比例退款。5 个工作日审核，10 个工作日原路返还。</p>
+            <p>合同生效后首 30 天内，如服务响应时间未达 SLA 承诺，或对工程师专业能力不满意，可申请未使用工时按比例退款。退款申请提交后 5 个工作日内审核，10 个工作日原路返还。</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Catalog -->
-  <section id="catalog" class="catalog section-padding">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-kicker">全栈技术覆盖</p>
-        <h2 class="section-title">服务目录</h2>
-        <p class="section-desc">
-          六大类服务，覆盖数百款主流产品与平台
-        </p>
-      </div>
-      <div class="catalog-grid">
-        <div class="catalog-item">
-          <div class="catalog-icon" aria-hidden="true">🏥</div>
-          <div class="catalog-content">
-            <h4>健康检查服务</h4>
-            <p>微软 AD/Exchange/SQL、VMware、深信服超融合、备份系统等主动巡检</p>
-          </div>
-        </div>
-        <div class="catalog-item">
-          <div class="catalog-icon" aria-hidden="true">🚨</div>
-          <div class="catalog-content">
-            <h4>被动响应与故障处理</h4>
-            <p>7×24 小时应急支持，Windows Server、Linux、公有云、安全产品等</p>
-          </div>
-        </div>
-        <div class="catalog-item">
-          <div class="catalog-icon" aria-hidden="true">⚡</div>
-          <div class="catalog-content">
-            <h4>主动优化与实施</h4>
-            <p>Office 365 迁移、Teams 配置、NSX 网络虚拟化、vSAN 存储架构</p>
-          </div>
-        </div>
-        <div class="catalog-item">
-          <div class="catalog-icon" aria-hidden="true">🛡️</div>
-          <div class="catalog-content">
-            <h4>安全专项服务</h4>
-            <p>渗透测试、漏洞扫描、等保咨询、EDR/SOC 运营、零信任架构设计</p>
-          </div>
-        </div>
-        <div class="catalog-item">
-          <div class="catalog-icon" aria-hidden="true">☁️</div>
-          <div class="catalog-content">
-            <h4>云与自动化服务</h4>
-            <p>Zabbix/Prometheus 监控、Ansible 自动化、ELK 日志分析、公有云 MSP</p>
-          </div>
-        </div>
-        <div class="catalog-item">
-          <div class="catalog-icon" aria-hidden="true">🎓</div>
-          <div class="catalog-content">
-            <h4>培训与认证服务</h4>
-            <p>ITIL 4、PMP、CISP、CISSP、信创专项、Adobe 创意软件等权威认证</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Process -->
-  <section id="process" class="process section-padding">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-kicker">标准化启动流程</p>
-        <h2 class="section-title">服务启动流程</h2>
-        <p class="section-desc">
-          全环节标准化，明确各阶段责任与时间节点
-        </p>
-      </div>
-      <div class="process-timeline">
-        <div class="process-step">
-          <div class="process-number">
-            <div class="process-number-circle">1</div>
-          </div>
-          <div class="process-content">
-            <h3 class="process-title">合同生效 T+1 工作日</h3>
-            <p class="process-desc">信诺 e 服运营中心开通 ITSM 系统基础服务权限</p>
-          </div>
-        </div>
-        <div class="process-step">
-          <div class="process-number">
-            <div class="process-number-circle">2</div>
-          </div>
-          <div class="process-content">
-            <h3 class="process-title">合同生效 T+3 工作日</h3>
-            <p class="process-desc">发送系统登录账号、初始密码、《系统使用操作指南》</p>
-          </div>
-        </div>
-        <div class="process-step">
-          <div class="process-number">
-            <div class="process-number-circle">3</div>
-          </div>
-          <div class="process-content">
-            <h3 class="process-title">合同生效 T+5 工作日</h3>
-            <p class="process-desc">CSM 组织首次启动会议，明确服务范围、响应标准、双方对接人</p>
-          </div>
-        </div>
-        <div class="process-step">
-          <div class="process-number">
-            <div class="process-number-circle">4</div>
-          </div>
-          <div class="process-content">
-            <h3 class="process-title">启动会议后 2 日内</h3>
-            <p class="process-desc">确认客户侧关键联系人，完成系统角色权限配置</p>
-          </div>
-        </div>
-        <div class="process-step">
-          <div class="process-number">
-            <div class="process-number-circle">5</div>
-          </div>
-          <div class="process-content">
-            <h3 class="process-title">服务启动后 15 日内（可选）</h3>
-            <p class="process-desc">提供免费系统健康检查，输出《健康检查报告》及优化建议</p>
-          </div>
-        </div>
+      
+      <div class="refund-note">
+        <strong>退款条件说明：</strong>
+        合同生效后 30 天内，如出现以下情况可申请退款：
+        （1）Level A 事件响应时间超过 SLA 承诺（1 小时）累计 2 次及以上；
+        （2）对工程师专业能力不满意，经 CSM 协调后仍无法解决；
+        （3）其他重大服务质量问题。退款金额为未使用工时 × 合同单价，审核通过后原路返还。
       </div>
     </div>
   </section>
@@ -1489,7 +1446,7 @@
       });
     }, observerOptions);
 
-    document.querySelectorAll('.pain-card, .solution-card, .role-card, .commitment-card, .catalog-item, .process-step').forEach(el => {
+    document.querySelectorAll('.stat-card, .pain-card, .solution-card, .commitment-card, .contact-card').forEach(el => {
       el.style.opacity = '0';
       observer.observe(el);
     });
