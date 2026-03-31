@@ -808,6 +808,203 @@
       line-height: 1.7;
     }
 
+    /* ===== Service Roles ===== */
+    .roles {
+      background: var(--color-bg-alt);
+    }
+
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+
+    @media (max-width: 992px) {
+      .roles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .role-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      text-align: center;
+      transition: all var(--duration-base) var(--ease-out);
+    }
+
+    .role-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-4px);
+    }
+
+    .role-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--space-6);
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .role-title {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .role-desc {
+      color: var(--color-text-secondary);
+      font-size: var(--text-sm);
+      line-height: 1.7;
+      margin-bottom: var(--space-6);
+    }
+
+    .role-features {
+      text-align: left;
+      list-style: none;
+    }
+
+    .role-features li {
+      padding: var(--space-2) 0;
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .role-features li:last-child {
+      border-bottom: none;
+    }
+
+    /* ===== Catalog ===== */
+    .catalog {
+      background: var(--color-bg);
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+
+    @media (max-width: 992px) {
+      .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .catalog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .catalog-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      transition: all var(--duration-fast) var(--ease-out);
+    }
+
+    .catalog-item:hover {
+      border-color: var(--color-border-strong);
+      background: var(--color-surface-hover);
+    }
+
+    .catalog-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .catalog-content h4 {
+      font-size: var(--text-base);
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+
+    .catalog-content p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== Process ===== */
+    .process {
+      background: var(--color-bg-alt);
+    }
+
+    .process-timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      left: 40px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-border);
+    }
+
+    .process-step {
+      display: flex;
+      gap: var(--space-8);
+      margin-bottom: var(--space-12);
+      position: relative;
+    }
+
+    .process-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .process-number {
+      width: 80px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .process-number-circle {
+      width: 80px;
+      height: 80px;
+      background: var(--color-bg);
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .process-content {
+      flex: 1;
+      padding-top: var(--space-4);
+    }
+
+    .process-title {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .process-desc {
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
     /* ===== CTA Section ===== */
     .cta {
       text-align: center;
@@ -1033,6 +1230,9 @@
         <li><a href="#pain-points">痛点</a></li>
         <li><a href="#solution">解决方案</a></li>
         <li><a href="#comparison">对比</a></li>
+        <li><a href="#roles">服务体系</a></li>
+        <li><a href="#catalog">服务目录</a></li>
+        <li><a href="#process">启动流程</a></li>
         <li><a href="#sla">SLA</a></li>
         <li><a href="#commitments">承诺</a></li>
         <li><a href="case-study.html">成功案例</a></li>
@@ -1361,6 +1561,171 @@
       </div>
       
 
+    </div>
+  </section>
+
+  <!-- Roles -->
+  <section id="roles" class="roles section-padding">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">三级支持体系</p>
+        <h2 class="section-title">专业服务角色</h2>
+        <p class="section-desc">
+          从统一入口到专家攻关，每一层都有明确职责和能力标准
+        </p>
+      </div>
+      <div class="roles-grid">
+        <div class="role-card">
+          <div class="role-icon" aria-hidden="true">📞</div>
+          <h3 class="role-title">服务台</h3>
+          <p class="role-desc">统一入口，全程跟踪</p>
+          <ul class="role-features">
+            <li>电话/邮件/企业微信/ITSM</li>
+            <li>工单创建与分派</li>
+            <li>法定工作日 9:00-18:00</li>
+            <li>7×24 紧急通道（Level A）</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <div class="role-icon" aria-hidden="true">👤</div>
+          <h3 class="role-title">客户成功经理</h3>
+          <p class="role-desc">您的专属技术伙伴</p>
+          <ul class="role-features">
+            <li>ITIL 4/PMP 认证，5 年 + 经验</li>
+            <li>服务启动与健康检查</li>
+            <li>资源协调与升级</li>
+            <li>季度服务回顾会议</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <div class="role-icon" aria-hidden="true">🔧</div>
+          <h3 class="role-title">技术支持工程师</h3>
+          <p class="role-desc">三级专家梯队</p>
+          <ul class="role-features">
+            <li>一线：快速诊断修复</li>
+            <li>二线：复杂问题处理</li>
+            <li>三线：架构级专家攻关</li>
+            <li>50+ 同类案例经验</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog -->
+  <section id="catalog" class="catalog section-padding">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">全栈技术覆盖</p>
+        <h2 class="section-title">服务目录</h2>
+        <p class="section-desc">
+          六大类服务，覆盖数百款主流产品与平台
+        </p>
+      </div>
+      <div class="catalog-grid">
+        <div class="catalog-item">
+          <div class="catalog-icon" aria-hidden="true">🏥</div>
+          <div class="catalog-content">
+            <h4>健康检查服务</h4>
+            <p>微软 AD/Exchange/SQL、VMware、深信服超融合、备份系统等主动巡检</p>
+          </div>
+        </div>
+        <div class="catalog-item">
+          <div class="catalog-icon" aria-hidden="true">🚨</div>
+          <div class="catalog-content">
+            <h4>被动响应与故障处理</h4>
+            <p>7×24 小时应急支持，Windows Server、Linux、公有云、安全产品等</p>
+          </div>
+        </div>
+        <div class="catalog-item">
+          <div class="catalog-icon" aria-hidden="true">⚡</div>
+          <div class="catalog-content">
+            <h4>主动优化与实施</h4>
+            <p>Office 365 迁移、Teams 配置、NSX 网络虚拟化、vSAN 存储架构</p>
+          </div>
+        </div>
+        <div class="catalog-item">
+          <div class="catalog-icon" aria-hidden="true">🛡️</div>
+          <div class="catalog-content">
+            <h4>安全专项服务</h4>
+            <p>渗透测试、漏洞扫描、等保咨询、EDR/SOC 运营、零信任架构设计</p>
+          </div>
+        </div>
+        <div class="catalog-item">
+          <div class="catalog-icon" aria-hidden="true">☁️</div>
+          <div class="catalog-content">
+            <h4>云与自动化服务</h4>
+            <p>Zabbix/Prometheus 监控、Ansible 自动化、ELK 日志分析、公有云 MSP</p>
+          </div>
+        </div>
+        <div class="catalog-item">
+          <div class="catalog-icon" aria-hidden="true">🎓</div>
+          <div class="catalog-content">
+            <h4>培训与认证服务</h4>
+            <p>ITIL 4、PMP、CISP、CISSP、信创专项、Adobe 创意软件等权威认证</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="process section-padding">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">标准化启动流程</p>
+        <h2 class="section-title">服务启动流程</h2>
+        <p class="section-desc">
+          全环节标准化，明确各阶段责任与时间节点
+        </p>
+      </div>
+      <div class="process-timeline">
+        <div class="process-step">
+          <div class="process-number">
+            <div class="process-number-circle">1</div>
+          </div>
+          <div class="process-content">
+            <h3 class="process-title">合同生效 T+1 工作日</h3>
+            <p class="process-desc">信诺 e 服运营中心开通 ITSM 系统基础服务权限</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-number">
+            <div class="process-number-circle">2</div>
+          </div>
+          <div class="process-content">
+            <h3 class="process-title">合同生效 T+3 工作日</h3>
+            <p class="process-desc">发送系统登录账号、初始密码、《系统使用操作指南》</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-number">
+            <div class="process-number-circle">3</div>
+          </div>
+          <div class="process-content">
+            <h3 class="process-title">合同生效 T+5 工作日</h3>
+            <p class="process-desc">CSM 组织首次启动会议，明确服务范围、响应标准、双方对接人</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-number">
+            <div class="process-number-circle">4</div>
+          </div>
+          <div class="process-content">
+            <h3 class="process-title">启动会议后 2 日内</h3>
+            <p class="process-desc">确认客户侧关键联系人，完成系统角色权限配置</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-number">
+            <div class="process-number-circle">5</div>
+          </div>
+          <div class="process-content">
+            <h3 class="process-title">服务启动后 15 日内（可选）</h3>
+            <p class="process-desc">提供免费系统健康检查，输出《健康检查报告》及优化建议</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
