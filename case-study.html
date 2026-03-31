@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>客户成功案例 - 信诺时代 ETS 企业高级技术支持服务</title>
+  <meta name="description" content="查看信诺时代 ETS 服务如何帮助企业减少 80% 业务中断时间，提升 IT 运维效率">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS 变量系统（OKLCH 色彩空间）===== */
+    :root {
+      --color-bg: #0f0f0f;
+      --color-bg-alt: #161616;
+      --color-surface: rgba(30, 30, 30, 0.8);
+      --color-surface-hover: rgba(40, 40, 40, 0.9);
+      --color-text: #f0f0f0;
+      --color-text-secondary: #a8a8a8;
+      --color-text-muted: #6b6b6b;
+      --color-border: rgba(255, 255, 255, 0.12);
+      --color-border-strong: rgba(255, 255, 255, 0.2);
+      --color-primary: oklch(0.65 0.18 250);
+      --color-primary-hover: oklch(0.55 0.2 250);
+      --color-accent: oklch(0.7 0.15 180);
+      --color-gradient: linear-gradient(135deg, oklch(0.65 0.18 250) 0%, oklch(0.7 0.15 180) 100%);
+      --color-success: oklch(0.7 0.14 150);
+      --color-warning: oklch(0.75 0.16 70);
+      --color-error: oklch(0.65 0.2 25);
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.38vw, 1rem);
+      --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.63vw, 1.25rem);
+      --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+      --text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+      --text-3xl: clamp(1.875rem, 1.5rem + 1.88vw, 2.5rem);
+      --text-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3rem);
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-2xl: 1.5rem;
+      --radius-full: 9999px;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-base: 250ms;
+      --container-max: 1280px;
+      --header-height: 72px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.6; color: var(--color-text); background: var(--color-bg); overflow-x: hidden; }
+
+    [data-theme="light"] {
+      --color-bg: #ffffff;
+      --color-bg-alt: #f8f9fa;
+      --color-surface: rgba(255, 255, 255, 0.9);
+      --color-text: #1a1a1a;
+      --color-text-secondary: #525252;
+      --color-text-muted: #525252;
+      --color-border: rgba(0, 0, 0, 0.12);
+      --color-border-strong: rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:focus-visible, a:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+    
+    .btn { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 600; text-decoration: none; transition: all var(--duration-base) var(--ease-out); cursor: pointer; border: 1px solid var(--color-border-strong); background: transparent; color: var(--color-text); }
+    .btn-secondary { background: transparent; color: var(--color-text); border: 1px solid var(--color-border-strong); }
+    .btn-secondary:hover { background: var(--color-surface); border-color: var(--color-text-muted); }
+
+    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-8); }
+    .section-padding { padding: var(--space-24) 0; }
+    @media (max-width: 768px) { .section-padding { padding: var(--space-16) 0; } }
+
+    /* Navbar */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: rgba(15, 15, 15, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); z-index: 1000; display: flex; align-items: center; }
+    [data-theme="light"] .navbar { background: rgba(255, 255, 255, 0.9); }
+    .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: var(--text-xl); font-weight: 700; color: var(--color-text); text-decoration: none; }
+    .logo span { color: var(--color-primary); }
+    .nav-links { display: flex; gap: var(--space-8); list-style: none; }
+    .nav-links a { color: var(--color-text-secondary); text-decoration: none; font-size: var(--text-sm); font-weight: 500; transition: color var(--duration-base) var(--ease-out); }
+    .nav-links a:hover { color: var(--color-text); }
+    .nav-cta { background: var(--color-gradient); color: white; padding: var(--space-3) var(--space-6); border-radius: var(--radius-full); text-decoration: none; font-size: var(--text-sm); font-weight: 600; transition: transform var(--duration-base) var(--ease-out); }
+    .nav-cta:hover { transform: translateY(-2px); }
+    @media (max-width: 992px) { .nav-links { display: none; } }
+
+    /* Hero */
+    .case-hero { padding-top: var(--header-height); min-height: 60vh; display: flex; align-items: center; background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.08) 0%, transparent 50%), radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.06) 0%, transparent 50%); }
+    [data-theme="light"] .case-hero { background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.04) 0%, transparent 50%), radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.03) 0%, transparent 50%); }
+    .case-hero-content { max-width: 900px; }
+    .case-hero-kicker { font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-primary); margin-bottom: var(--space-6); }
+    .case-hero-title { font-size: var(--text-4xl); font-weight: 700; line-height: 1.2; margin-bottom: var(--space-6); }
+    .case-hero-subtitle { font-size: var(--text-xl); color: var(--color-text-secondary); line-height: 1.7; }
+
+    /* Case Filters */
+    .case-filters { padding: var(--space-16) 0; background: var(--color-bg-alt); }
+    .filter-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
+    @media (max-width: 992px) { .filter-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 576px) { .filter-grid { grid-template-columns: 1fr; } }
+    .filter-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-8); cursor: pointer; transition: all var(--duration-base) var(--ease-out); }
+    .filter-card:hover { border-color: var(--color-primary); transform: translateY(-4px); }
+    .filter-icon { font-size: 2.5rem; margin-bottom: var(--space-4); }
+    .filter-title { font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-2); }
+    .filter-desc { font-size: var(--text-sm); color: var(--color-text-secondary); line-height: 1.6; }
+
+    /* Case Detail */
+    .case-detail { display: none; }
+    .case-detail.active { display: block; }
+    .case-detail-nav { display: flex; gap: var(--space-4); margin-bottom: var(--space-12); }
+    .back-btn { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--color-text-secondary); text-decoration: none; font-size: var(--text-base); transition: color var(--duration-base) var(--ease-out); }
+    .back-btn:hover { color: var(--color-primary); }
+
+    .case-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-12); gap: var(--space-8); }
+    @media (max-width: 768px) { .case-header { flex-direction: column; } }
+    .case-title-group { flex: 1; }
+    .case-industry { display: inline-block; padding: var(--space-2) var(--space-4); background: rgba(59, 130, 246, 0.15); border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-4); }
+    .case-title { font-size: var(--text-3xl); font-weight: 700; margin-bottom: var(--space-4); }
+    .case-overview { flex: 1; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-8); }
+    .case-overview h4 { font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-4); }
+    .case-overview ul { list-style: none; }
+    .case-overview li { padding: var(--space-2) 0; color: var(--color-text-secondary); font-size: var(--text-sm); border-bottom: 1px solid var(--color-border); }
+    .case-overview li:last-child { border-bottom: none; }
+
+    .case-section-title { font-size: var(--text-2xl); font-weight: 700; margin-bottom: var(--space-8); display: flex; align-items: center; gap: var(--space-3); }
+    .case-section-title::before { content: ''; width: 4px; height: 24px; background: var(--color-gradient); border-radius: var(--radius-lg); }
+
+    .challenges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); margin-bottom: var(--space-12); }
+    @media (max-width: 768px) { .challenges-grid { grid-template-columns: 1fr; } }
+    .challenge-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6); }
+    .challenge-card h4 { font-size: var(--text-base); font-weight: 600; margin-bottom: var(--space-2); }
+    .challenge-card p { color: var(--color-text-secondary); font-size: var(--text-sm); line-height: 1.7; }
+
+    .solutions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-8); margin-bottom: var(--space-12); }
+    @media (max-width: 768px) { .solutions-grid { grid-template-columns: 1fr; } }
+    .solution-module { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-8); }
+    .solution-module h4 { font-size: var(--text-xl); font-weight: 600; margin-bottom: var(--space-4); color: var(--color-primary); }
+    .solution-table { width: 100%; border-collapse: collapse; }
+    .solution-table td { padding: var(--space-3) 0; font-size: var(--text-sm); color: var(--color-text-secondary); border-bottom: 1px solid var(--color-border); }
+    .solution-table tr:last-child td { border-bottom: none; }
+    .solution-table td:first-child { font-weight: 500; color: var(--color-text); width: 40%; }
+
+    .results-table { width: 100%; border-collapse: collapse; margin-bottom: var(--space-12); }
+    .results-table th, .results-table td { padding: var(--space-6) var(--space-8); text-align: left; border-bottom: 1px solid var(--color-border); }
+    .results-table th { font-size: var(--text-sm); font-weight: 600; color: var(--color-text-muted); background: var(--color-surface); text-transform: uppercase; letter-spacing: 0.05em; }
+    .results-table td { color: var(--color-text-secondary); }
+    .results-table tr:hover td { background: var(--color-surface-hover); }
+    .improvement { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1) var(--space-3); border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600; }
+    .improvement.up { background: rgba(16, 185, 129, 0.15); color: var(--color-success); }
+    .improvement.down { background: rgba(239, 68, 68, 0.15); color: var(--color-error); }
+
+    .case-testimonial { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-10); text-align: center; margin-bottom: var(--space-12); }
+    .case-testimonial blockquote { font-size: var(--text-xl); font-style: italic; color: var(--color-text-secondary); line-height: 1.8; max-width: 800px; margin: 0 auto var(--space-6); }
+    .case-testimonial cite { font-style: normal; font-weight: 600; color: var(--color-text); }
+
+    .case-highlights { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
+    @media (max-width: 992px) { .case-highlights { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 576px) { .case-highlights { grid-template-columns: 1fr; } }
+    .highlight-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6); text-align: center; }
+    .highlight-icon { font-size: 2rem; margin-bottom: var(--space-3); }
+    .highlight-title { font-size: var(--text-base); font-weight: 600; margin-bottom: var(--space-2); }
+    .highlight-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+
+    /* Footer */
+    .footer { background: var(--color-bg-alt); border-top: 1px solid var(--color-border); padding: var(--space-12) 0; }
+    .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-8); }
+    .footer-logo { font-size: var(--text-lg); font-weight: 700; }
+    .footer-logo span { color: var(--color-primary); }
+    .footer-text { color: var(--color-text-muted); font-size: var(--text-sm); }
+
+    /* Animation */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-in { animation: fadeInUp 0.6s var(--ease-out) forwards; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <!-- 导航 -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">信诺<span>ETS</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#stats">客户数据</a></li>
+        <li><a href="index.html#pain-points">痛点</a></li>
+        <li><a href="index.html#solution">解决方案</a></li>
+        <li><a href="index.html#comparison">对比</a></li>
+        <li><a href="index.html#sla">SLA</a></li>
+        <li><a href="index.html#commitments">承诺</a></li>
+        <li><a href="case-study.html">成功案例</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: var(--space-4);">
+        <button id="themeToggle" class="btn btn-secondary" title="切换主题">
+          <span id="themeIcon">🌙</span>
+        </button>
+        <a href="index.html#contact" class="nav-cta">立即咨询</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="case-hero">
+    <div class="container">
+      <div class="case-hero-content">
+        <p class="case-hero-kicker animate-in">Customer Success Stories</p>
+        <h1 class="case-hero-title animate-in delay-1">客户成功案例</h1>
+        <p class="case-hero-subtitle animate-in delay-2">
+          了解各行业企业如何通过信诺时代 ETS 服务实现 IT 运维转型，减少业务中断，提升运营效率
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Filters -->
+  <section class="case-filters">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: var(--space-12);">
+        <p style="color: var(--color-text-muted); font-size: var(--text-sm); margin-bottom: var(--space-2);">累计已服务 1000+ 企业客户</p>
+        <p style="color: var(--color-text-secondary); font-size: var(--text-base);">覆盖金融、制造、科技、医疗等多个行业</p>
+      </div>
+      <div class="filter-grid">
+        <div class="filter-card animate-in" onclick="showCase('case1')">
+          <div class="filter-icon">🏢</div>
+          <h3 class="filter-title">控股集团</h3>
+          <p class="filter-desc">跨国企业 IT 全栈技术支持，虚拟化替代与成本优化</p>
+        </div>
+        <div class="filter-card animate-in delay-1" onclick="showCase('case2')">
+          <div class="filter-icon">🏦</div>
+          <h3 class="filter-title">金融机构</h3>
+          <p class="filter-desc">高可用架构设计与安全合规支持（即将上线）</p>
+        </div>
+        <div class="filter-card animate-in delay-2" onclick="showCase('case3')">
+          <div class="filter-icon">🏭</div>
+          <h3 class="filter-title">制造企业</h3>
+          <p class="filter-desc">工厂 IT 基础设施监控与灾备建设（即将上线）</p>
+        </div>
+        <div class="filter-card animate-in delay-3" onclick="showCase('case4')">
+          <div class="filter-icon">💊</div>
+          <h3 class="filter-title">医疗健康</h3>
+          <p class="filter-desc">核心业务系统保障与数据安全（即将上线）</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case 1: 控股集团 -->
+  <section id="case1" class="case-detail section-padding">
+    <div class="container">
+      <div class="case-detail-nav">
+        <a href="#" class="back-btn" onclick="hideCase()">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          返回案例列表
+        </a>
+      </div>
+
+      <div class="case-header">
+        <div class="case-title-group">
+          <span class="case-industry">多元化控股集团</span>
+          <h2 class="case-title">跨国企业 IT 全栈技术支持</h2>
+          <p style="color: var(--color-text-secondary); font-size: var(--text-lg); line-height: 1.7;">
+            为某控股集团提供微软、深信服、VMware 全栈技术支持，实现跨国协作优化、虚拟化替代、安全加固与主动运维
+          </p>
+        </div>
+        <div class="case-overview">
+          <h4>服务概览</h4>
+          <ul>
+            <li><strong>服务等级：</strong>Level B/C 混合</li>
+            <li><strong>服务团队：</strong>专属 CSM + 二线工程师</li>
+            <li><strong>服务方式：</strong>远程支持 + 定期现场健康检查</li>
+            <li><strong>服务周期：</strong>6 个月</li>
+            <li><strong>技术领域：</strong>微软/深信服/VMware/监控/日志</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="case-challenges">
+        <h3 class="case-section-title">核心挑战</h3>
+        <div class="challenges-grid">
+          <div class="challenge-card">
+            <h4>🌍 跨国协作效率低</h4>
+            <p>中国与欧洲办公区邮件流不畅，时差 + 网络延迟导致沟通受阻；Exchange 系统版本老旧，存在安全漏洞风险</p>
+          </div>
+          <div class="challenge-card">
+            <h4>🔒 虚拟化平台依赖风险</h4>
+            <p>全面依赖 VMware，缺乏替代方案，供应商锁定风险高；超融合架构需要评估和迁移规划</p>
+          </div>
+          <div class="challenge-card">
+            <h4>🛡️ 安全合规压力</h4>
+            <p>终端安全分散管理，缺乏统一策略；AD/Exchange 安全日志无人分析，潜在威胁无法及时发现</p>
+          </div>
+          <div class="challenge-card">
+            <h4>🔥 运维被动响应</h4>
+            <p>服务器、中间件缺乏主动监控，故障发现依赖用户报障；IT 团队精力分散在救火，无法聚焦业务创新</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-solutions">
+        <h3 class="case-section-title">ETS 解决方案</h3>
+        <div class="solutions-grid">
+          <div class="solution-module">
+            <h4>🪟 微软全栈服务</h4>
+            <table class="solution-table">
+              <tr><td>AD 升级</td><td>Windows Server 2012 → 2019，优化域控制器架构</td></tr>
+              <tr><td>Exchange 升级</td><td>Exchange 2013 → 2019，修复已知安全漏洞</td></tr>
+              <tr><td>跨国邮件流优化</td><td>配置智能中继 + 发送连接器，中欧邮件延迟降低 60%</td></tr>
+              <tr><td>容灾架构设计</td><td>DAG 数据库可用性组，实现邮箱数据异地冗余</td></tr>
+            </table>
+          </div>
+          <div class="solution-module">
+            <h4>☁️ 深信服超融合替代</h4>
+            <table class="solution-table">
+              <tr><td>VMware 评估</td><td>现有 VM 数量、资源利用率、依赖关系全面盘点</td></tr>
+              <tr><td>迁移规划</td><td>分批次迁移方案，业务零中断</td></tr>
+              <tr><td>深信服 HCI 部署</td><td>3 节点超融合集群，承载核心业务系统</td></tr>
+              <tr><td>成本优化</td><td>相比 VMware 续保，3 年 TCO 降低 45%</td></tr>
+            </table>
+          </div>
+          <div class="solution-module">
+            <h4>🛡️ 深信服安全服务</h4>
+            <table class="solution-table">
+              <tr><td>终端安全部署</td><td>500+ 终端安装 EDR 代理，统一策略管理</td></tr>
+              <tr><td>威胁检测</td><td>实时监测恶意软件、勒索软件、异常行为</td></tr>
+              <tr><td>安全加固</td><td>服务器基线核查，修复高危漏洞 23 项</td></tr>
+            </table>
+          </div>
+          <div class="solution-module">
+            <h4>📊 监控与日志分析</h4>
+            <table class="solution-table">
+              <tr><td>监控部署</td><td>Zabbix 覆盖 50+ 服务器、10+ 中间件</td></tr>
+              <tr><td>告警优化</td><td>分级告警（紧急/重要/警告），减少告警疲劳</td></tr>
+              <tr><td>日志收集</td><td>ELK 集中收集 AD/Exchange 安全日志</td></tr>
+              <tr><td>分析报告</td><td>月度《AD/Exchange 安全日志分析报告》</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-results">
+        <h3 class="case-section-title">服务成果（6 个月周期）</h3>
+        <table class="results-table">
+          <thead>
+            <tr><th>指标</th><th>改善前</th><th>改善后</th><th>提升</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>中欧邮件延迟</strong></td><td>平均 8 秒</td><td>平均 3 秒</td><td><span class="improvement down">⬇️ 60%</span></td></tr>
+            <tr><td><strong>系统告警响应时间</strong></td><td>2-4 小时</td><td>15 分钟</td><td><span class="improvement down">⬇️ 90%</span></td></tr>
+            <tr><td><strong>安全事件发现</strong></td><td>被动发现</td><td>主动预警</td><td><span class="improvement up">⬆️ 100%</span></td></tr>
+            <tr><td><strong>IT 运维工时</strong></td><td>60% 救火</td><td>25% 救火</td><td><span class="improvement down">⬇️ 58%</span></td></tr>
+            <tr><td><strong>虚拟化成本</strong></td><td>VMware 续保高价</td><td>深信服替代</td><td><span class="improvement down">⬇️ 45%（3 年 TCO）</span></td></tr>
+            <tr><td><strong>故障闭环率</strong></td><td>85%</td><td>99%</td><td><span class="improvement up">⬆️ 14%</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="case-testimonial">
+        <blockquote>
+          "信诺时代 ETS 团队不仅帮我们解决了技术问题，更重要的是带来了主动预防的运维理念。
+          现在我们的系统稳定性提升了，IT 团队也有更多精力支持业务发展。"
+        </blockquote>
+        <cite>— 集团 IT 总监</cite>
+      </div>
+
+      <div class="case-highlights">
+        <div class="highlight-card">
+          <div class="highlight-icon">🎯</div>
+          <h4 class="highlight-title">全栈覆盖</h4>
+          <p class="highlight-desc">微软/深信服/VMware/监控/日志，单一联络窗口</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🔍</div>
+          <h4 class="highlight-title">主动预防</h4>
+          <p class="highlight-desc">月度健康检查 + 日志分析报告，防患于未然</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">💰</div>
+          <h4 class="highlight-title">成本优化</h4>
+          <p class="highlight-desc">虚拟化替代方案 3 年节省 45% TCO</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">🌐</div>
+          <h4 class="highlight-title">跨国支持</h4>
+          <p class="highlight-desc">中欧邮件流优化，支持全球化业务</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div style="text-align: center; margin-top: var(--space-20); padding: var(--space-16); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-2xl);">
+        <h3 style="font-size: var(--text-2xl); font-weight: 700; margin-bottom: var(--space-4);">您的企业也需要类似方案？</h3>
+        <p style="color: var(--color-text-secondary); font-size: var(--text-lg); margin-bottom: var(--space-8); max-width: 600px; margin-left: auto; margin-right: auto;">
+          与专属 CSM 沟通，定制适合您企业的 ETS 服务方案
+        </p>
+        <a href="index.html#contact" class="btn btn-primary" style="background: var(--color-gradient); color: white; padding: var(--space-4) var(--space-10); border: none;">
+          获取服务方案
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: inline-block; vertical-align: middle; margin-left: var(--space-2);">
+            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">信诺<span>ETS</span></div>
+        <p class="footer-text">© 2025 信诺时代科技发展有限公司。All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== 主题切换 =====
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('ets-theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('ets-theme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    function updateThemeIcon(theme) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    // ===== 案例切换 =====
+    function showCase(caseId) {
+      document.querySelectorAll('.case-detail').forEach(el => el.classList.remove('active'));
+      document.getElementById(caseId).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function hideCase() {
+      document.querySelectorAll('.case-detail').forEach(el => el.classList.remove('active'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
