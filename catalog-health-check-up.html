@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>健康检查服务 - 信诺 e 服 ETS 企业高级技术支持服务</title>
+  <meta name="description" content="专业工程师深度检测，主动发现系统风险，预防优于治疗">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS 变量系统（OKLCH 色彩空间）===== */
+    :root {
+      --color-bg: #0f0f0f;
+      --color-bg-alt: #161616;
+      --color-surface: rgba(30, 30, 30, 0.8);
+      --color-surface-hover: rgba(40, 40, 40, 0.9);
+      --color-text: #f0f0f0;
+      --color-text-secondary: #a8a8a8;
+      --color-text-muted: #6b6b6b;
+      --color-border: rgba(255, 255, 255, 0.12);
+      --color-border-strong: rgba(255, 255, 255, 0.2);
+      --color-primary: oklch(0.65 0.18 250);
+      --color-primary-hover: oklch(0.55 0.2 250);
+      --color-accent: oklch(0.7 0.15 180);
+      --color-gradient: linear-gradient(135deg, oklch(0.65 0.18 250) 0%, oklch(0.7 0.15 180) 100%);
+      --color-success: oklch(0.7 0.14 150);
+      --color-warning: oklch(0.75 0.16 70);
+      --color-error: oklch(0.65 0.2 25);
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.38vw, 1rem);
+      --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.63vw, 1.25rem);
+      --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+      --text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+      --text-3xl: clamp(1.875rem, 1.5rem + 1.88vw, 2.5rem);
+      --text-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3rem);
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+      --space-32: 8rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-2xl: 1.5rem;
+      --radius-full: 9999px;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-base: 250ms;
+      --container-max: 1280px;
+      --header-height: 72px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.6; color: var(--color-text); background: var(--color-bg); overflow-x: hidden; }
+
+    [data-theme="light"] {
+      --color-bg: #ffffff;
+      --color-bg-alt: #f8f9fa;
+      --color-surface: rgba(255, 255, 255, 0.9);
+      --color-text: #1a1a1a;
+      --color-text-secondary: #525252;
+      --color-text-muted: #525252;
+      --color-border: rgba(0, 0, 0, 0.12);
+      --color-border-strong: rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:focus-visible, a:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-8); }
+    .section-padding { padding: var(--space-24) 0; }
+    @media (max-width: 768px) { .section-padding { padding: var(--space-16) 0; } }
+
+    /* Navbar */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: rgba(15, 15, 15, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); z-index: 1000; display: flex; align-items: center; }
+    [data-theme="light"] .navbar { background: rgba(255, 255, 255, 0.9); }
+    .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: var(--text-xl); font-weight: 700; color: var(--color-text); text-decoration: none; }
+    .logo span { color: var(--color-primary); }
+    .nav-links { display: flex; gap: var(--space-8); list-style: none; }
+    .nav-links a { color: var(--color-text-secondary); text-decoration: none; font-size: var(--text-sm); font-weight: 500; transition: color var(--duration-base) var(--ease-out); }
+    .nav-links a:hover { color: var(--color-text); }
+    .nav-cta { background: var(--color-gradient); color: white; padding: var(--space-3) var(--space-6); border-radius: var(--radius-full); text-decoration: none; font-size: var(--text-sm); font-weight: 600; transition: transform var(--duration-base) var(--ease-out); }
+    .nav-cta:hover { transform: translateY(-2px); }
+    @media (max-width: 992px) { .nav-links { display: none; } }
+
+    /* Hero */
+    .catalog-hero { padding-top: var(--header-height); min-height: 50vh; display: flex; align-items: center; background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.08) 0%, transparent 50%), radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.06) 0%, transparent 50%); }
+    [data-theme="light"] .catalog-hero { background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.04) 0%, transparent 50%), radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.03) 0%, transparent 50%); }
+    .catalog-hero-content { max-width: 900px; }
+    .catalog-hero-kicker { font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-primary); margin-bottom: var(--space-6); }
+    .catalog-hero-title { font-size: var(--text-4xl); font-weight: 700; line-height: 1.2; margin-bottom: var(--space-6); }
+    .catalog-hero-subtitle { font-size: var(--text-xl); color: var(--color-text-secondary); line-height: 1.7; }
+
+    /* Service Overview */
+    .service-overview { background: var(--color-bg-alt); }
+    .overview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
+    @media (max-width: 992px) { .overview-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 576px) { .overview-grid { grid-template-columns: 1fr; } }
+    .overview-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-8); text-align: center; }
+    .overview-icon { font-size: 2.5rem; margin-bottom: var(--space-4); }
+    .overview-title { font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-2); }
+    .overview-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+
+    /* Service Table */
+    .service-table-container { overflow-x: auto; }
+    .service-table { width: 100%; border-collapse: collapse; min-width: 1200px; }
+    .service-table th, .service-table td { padding: var(--space-6) var(--space-8); text-align: left; border-bottom: 1px solid var(--color-border); }
+    .service-table th { font-size: var(--text-sm); font-weight: 600; color: var(--color-text-muted); background: var(--color-surface); text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+    .service-table td { color: var(--color-text-secondary); vertical-align: top; }
+    .service-table tr:hover td { background: var(--color-surface-hover); }
+    .service-table .service-name { font-weight: 600; color: var(--color-text); white-space: nowrap; }
+    .service-table .service-desc { font-size: var(--text-sm); line-height: 1.7; max-width: 600px; }
+    .service-table .service-delivery { font-size: var(--text-sm); color: var(--color-text-muted); white-space: nowrap; }
+    
+    .level-badge { display: inline-block; padding: var(--space-1) var(--space-3); border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; margin-right: var(--space-1); }
+    .level-a { background: rgba(239, 68, 68, 0.15); color: var(--color-error); }
+    .level-b { background: rgba(245, 158, 11, 0.15); color: var(--color-warning); }
+    .level-c { background: rgba(59, 130, 246, 0.15); color: var(--color-primary); }
+    
+    .service-method { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+    .method-badge { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1) var(--space-2); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-xs); color: var(--color-text-secondary); }
+    .method-badge.active { background: rgba(16, 185, 129, 0.15); border-color: var(--color-success); color: var(--color-success); }
+
+    /* Value Props */
+    .value-props { background: var(--color-bg-alt); }
+    .value-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8); }
+    @media (max-width: 992px) { .value-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 576px) { .value-grid { grid-template-columns: 1fr; } }
+    .value-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-8); text-align: center; transition: all var(--duration-base) var(--ease-out); }
+    .value-card:hover { border-color: var(--color-primary); transform: translateY(-4px); }
+    .value-icon { font-size: 2.5rem; margin-bottom: var(--space-4); }
+    .value-title { font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-2); }
+    .value-desc { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.6; }
+
+    /* CTA */
+    .catalog-cta { text-align: center; background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%); }
+    .cta-title { font-size: var(--text-3xl); font-weight: 700; margin-bottom: var(--space-6); }
+    .cta-desc { font-size: var(--text-lg); color: var(--color-text-secondary); margin-bottom: var(--space-10); max-width: 600px; margin-left: auto; margin-right: auto; }
+    .btn { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-4) var(--space-10); border-radius: var(--radius-full); font-size: var(--text-base); font-weight: 600; text-decoration: none; transition: all var(--duration-base) var(--ease-out); cursor: pointer; border: none; }
+    .btn-primary { background: var(--color-gradient); color: white; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4); }
+
+    /* Footer */
+    .footer { background: var(--color-bg-alt); border-top: 1px solid var(--color-border); padding: var(--space-12) 0; }
+    .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-8); }
+    .footer-logo { font-size: var(--text-lg); font-weight: 700; }
+    .footer-logo span { color: var(--color-primary); }
+    .footer-text { color: var(--color-text-muted); font-size: var(--text-sm); }
+
+    /* Animation */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-in { animation: fadeInUp 0.6s var(--ease-out) forwards; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <!-- 导航 -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">信诺 e 服 <span>ETS</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#stats">客户数据</a></li>
+        <li><a href="index.html#pain-points">痛点</a></li>
+        <li><a href="index.html#solution">解决方案</a></li>
+        <li><a href="index.html#comparison">对比</a></li>
+        <li><a href="index.html#roles">服务体系</a></li>
+        <li><a href="index.html#catalog">服务目录</a></li>
+        <li><a href="index.html#process">启动流程</a></li>
+        <li><a href="index.html#sla">SLA</a></li>
+        <li><a href="index.html#commitments">承诺</a></li>
+        <li><a href="case-study.html">成功案例</a></li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta">立即咨询</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="catalog-hero">
+    <div class="container">
+      <div class="catalog-hero-content">
+        <p class="catalog-hero-kicker animate-in">Health Check-up Service</p>
+        <h1 class="catalog-hero-title animate-in delay-1">健康检查服务</h1>
+        <p class="catalog-hero-subtitle animate-in delay-2">
+          专业工程师深度检测，主动发现系统风险，预防优于治疗。覆盖微软全线产品，确保您的 IT 系统稳定运行。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Overview -->
+  <section class="service-overview section-padding">
+    <div class="container">
+      <div class="overview-grid">
+        <div class="overview-card animate-in">
+          <div class="overview-icon"></div>
+          <h3 class="overview-title">服务等级</h3>
+          <p class="overview-desc">Level A/B/C 可选，满足不同业务需求</p>
+        </div>
+        <div class="overview-card animate-in delay-1">
+          <div class="overview-icon">📊</div>
+          <h3 class="overview-title">服务交付</h3>
+          <p class="overview-desc">健康检查报告，问题清单，优化建议</p>
+        </div>
+        <div class="overview-card animate-in delay-2">
+          <div class="overview-icon">💻</div>
+          <h3 class="overview-title">服务方式</h3>
+          <p class="overview-desc">远程/电话/邮件，灵活选择</p>
+        </div>
+        <div class="overview-card animate-in delay-3">
+          <div class="overview-icon">⏱️</div>
+          <h3 class="overview-title">服务消耗</h3>
+          <p class="overview-desc">以实际发生为准，透明计费</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Table -->
+  <section class="service-table-section section-padding">
+    <div class="container">
+      <div class="section-header" style="text-align: center; max-width: 700px; margin: 0 auto var(--space-16);">
+        <p class="section-kicker" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-primary); margin-bottom: var(--space-4);">服务内容详情</p>
+        <h2 class="section-title" style="font-size: var(--text-3xl); font-weight: 700; line-height: 1.2; margin-bottom: var(--space-4);">微软产品健康检查服务</h2>
+        <p class="section-desc" style="font-size: var(--text-lg); color: var(--color-text-secondary); line-height: 1.7;">
+          专业工程师运用前沿工具，深入检测架构合理性、优化域林、站点布局，消除潜在风险点
+        </p>
+      </div>
+
+      <div class="service-table-container">
+        <table class="service-table">
+          <thead>
+            <tr>
+              <th>服务项</th>
+              <th>服务内容</th>
+              <th>服务描述</th>
+              <th>服务级别等级</th>
+              <th>服务方式</th>
+              <th>服务交付</th>
+              <th>服务消耗</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="service-name">AD</td>
+              <td rowspan="4" style="vertical-align: middle;">微软产品<br/>健康检查服务</td>
+              <td class="service-desc">专业工程师运用前沿工具，深入检测其架构合理性、优化域林、站点布局，消除潜在单点故障；精准审查身份认证体系，确保用户账户、组策略精准无误，筑牢安全防线；实时监控此服务专为确保 Exchange Server 高效稳定运行而设。</td>
+              <td>
+                <span class="level-badge level-a">A</span>
+                <span class="level-badge level-b">B</span>
+                <span class="level-badge level-c">C</span>
+              </td>
+              <td>
+                <div class="service-method">
+                  <span class="method-badge active">✓ 远程</span>
+                  <span class="method-badge active">✓ 电话</span>
+                  <span class="method-badge">邮件</span>
+                </div>
+              </td>
+              <td class="service-delivery">健康检查报告</td>
+              <td class="service-delivery">以实际发生为准</td>
+            </tr>
+            <tr>
+              <td class="service-name">Exchange</td>
+              <td class="service-desc">专业技术团队将从多关键领域展开深度巡检：在服务器架构和层面，评估负载均衡、容错能力，优化资源配置，预防单点故障；于邮件传输环节，监测路由、审查，保障邮件收发顺畅无延迟，深入检查用户邮箱配置，纠偏权限问题，严守安全漏洞，包括加密机制、防毒软件的审查，凭借精准监测工具与深厚技术积累，全面排查隐患，为 Exchange Server 持续健康"把脉"，助力企业通信无忧。</td>
+              <td>
+                <span class="level-badge level-a">A</span>
+                <span class="level-badge level-b">B</span>
+                <span class="level-badge level-c">C</span>
+              </td>
+              <td>
+                <div class="service-method">
+                  <span class="method-badge active">✓ 远程</span>
+                  <span class="method-badge active">✓ 电话</span>
+                  <span class="method-badge">邮件</span>
+                </div>
+              </td>
+              <td class="service-delivery">健康检查报告</td>
+              <td class="service-delivery">以实际发生为准</td>
+            </tr>
+            <tr>
+              <td class="service-name">WSUS</td>
+              <td class="service-desc">本 WSUS 健康检查服务专为企业 Windows 服务器 Update Services（WSUS）稳定高效运行而定制。专业技术团队深入其中各个关键环节：在服务器配置层面，严格审查 WSUS 服务器的硬件资源分配，优化内存、磁盘与 CPU 利用率，预防性能瓶颈；精准校验更新策略，确保各类 Windows 系统及软件补丁分发精准、及时，避免更新混乱或遗漏。同时，深度排查同步故障，修复与微软官方更新源的连接问题，保障数据传输顺畅，借助专业工具与丰富经验，全方位监测维护，让 WSUS 系统为企业 IT 环境筑牢安全防线。</td>
+              <td>
+                <span class="level-badge level-a">A</span>
+                <span class="level-badge level-b">B</span>
+                <span class="level-badge level-c">C</span>
+              </td>
+              <td>
+                <div class="service-method">
+                  <span class="method-badge active">✓ 远程</span>
+                  <span class="method-badge active">✓ 电话</span>
+                  <span class="method-badge">邮件</span>
+                </div>
+              </td>
+              <td class="service-delivery">健康检查报告</td>
+              <td class="service-delivery">以实际发生为准</td>
+            </tr>
+            <tr>
+              <td class="service-name">KMS</td>
+              <td class="service-desc">对于 Windows Server KMS，我们的健康检查服务专注且严谨。首先，会检测 KMS 服务器的网络连接性，确保客户端能顺利与之通信，避免激活受阻。其次，细致核查 KMS 密钥的有效性与合规性，杜绝因密钥问题引发的授权风险。同时，深度监测激活请求频率及响应状态，及时发现异常并波动，还会查看系统日志，排查潜在的激活故障隐患，全方位保障 Windows Server KMS 稳定、合规运行，让您的系统使用无后顾之忧。</td>
+              <td>
+                <span class="level-badge level-a">A</span>
+                <span class="level-badge level-b">B</span>
+                <span class="level-badge level-c">C</span>
+              </td>
+              <td>
+                <div class="service-method">
+                  <span class="method-badge active">✓ 远程</span>
+                  <span class="method-badge active">✓ 电话</span>
+                  <span class="method-badge">邮件</span>
+                </div>
+              </td>
+              <td class="service-delivery">健康检查报告</td>
+              <td class="service-delivery">以实际发生为准</td>
+            </tr>
+            <tr>
+              <td class="service-name">SQL Server</td>
+              <td rowspan="1" style="vertical-align: middle;">微软产品<br/>健康检查服务</td>
+              <td class="service-desc">运用专业工具与丰富经验，全方位检测 SQL Server，涵盖性能指标、安全漏洞、配置合理性等多方面，精准定位隐患，生成详细报告，助力企业提前预防风险，保障数据库平稳运行。</td>
+              <td>
+                <span class="level-badge level-a">A</span>
+                <span class="level-badge level-b">B</span>
+                <span class="level-badge level-c">C</span>
+              </td>
+              <td>
+                <div class="service-method">
+                  <span class="method-badge active">✓ 远程</span>
+                  <span class="method-badge active">✓ 电话</span>
+                  <span class="method-badge">邮件</span>
+                </div>
+              </td>
+              <td class="service-delivery">健康检查报告</td>
+              <td class="service-delivery">以实际发生为准</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Props -->
+  <section class="value-props section-padding">
+    <div class="container">
+      <div class="section-header" style="text-align: center; max-width: 700px; margin: 0 auto var(--space-16);">
+        <p class="section-kicker" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-primary); margin-bottom: var(--space-4);">服务价值</p>
+        <h2 class="section-title" style="font-size: var(--text-3xl); font-weight: 700; line-height: 1.2; margin-bottom: var(--space-4);">为什么选择健康检查服务？</h2>
+      </div>
+      <div class="value-grid">
+        <div class="value-card animate-in">
+          <div class="value-icon">🔍</div>
+          <h3 class="value-title">主动预防</h3>
+          <p class="value-desc">深度检测潜在风险，防患于未然，避免业务中断</p>
+        </div>
+        <div class="value-card animate-in delay-1">
+          <div class="value-icon">🎓</div>
+          <h3 class="value-title">专业工程师</h3>
+          <p class="value-desc">持证工程师团队，丰富经验，精准定位问题</p>
+        </div>
+        <div class="value-card animate-in delay-2">
+          <div class="value-icon">📊</div>
+          <h3 class="value-title">可量化交付</h3>
+          <p class="value-desc">健康检查报告、问题清单、优化建议，清晰透明</p>
+        </div>
+        <div class="value-card animate-in delay-3">
+          <div class="value-icon">💰</div>
+          <h3 class="value-title">成本可控</h3>
+          <p class="value-desc">预付费服务包模式，年度 IT 支持成本清晰可预期</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="catalog-cta section-padding">
+    <div class="container">
+      <h2 class="cta-title">需要为您的系统进行健康检查？</h2>
+      <p class="cta-desc">
+        与专属 CSM 沟通，定制适合您企业的健康检查服务方案
+      </p>
+      <a href="index.html#contact" class="btn btn-primary">
+        获取服务方案
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">信诺 e 服 <span>ETS</span></div>
+        <p class="footer-text">© 2025 信诺时代科技发展有限公司。All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem('ets-theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+  </script>
+</body>
+</html>
