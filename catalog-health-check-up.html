@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>健康检查服务 - 信诺 e 服 ETS 企业高级技术支持服务</title>
+  <title>健康检查服务 - 信诺e服 ETS 企业高级技术支持服务</title>
   <meta name="description" content="专业工程师深度检测，主动发现系统风险，预防优于治疗">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -168,20 +168,26 @@
   <!-- 导航 -->
   <nav class="navbar">
     <div class="container">
-      <a href="index.html" class="logo">信诺 e 服 <span>ETS</span></a>
+      <a href="index.html" class="logo">信诺e服<span>ETS</span></a>
       <ul class="nav-links">
         <li><a href="index.html#stats">客户数据</a></li>
         <li><a href="index.html#pain-points">痛点</a></li>
         <li><a href="index.html#solution">解决方案</a></li>
         <li><a href="index.html#comparison">对比</a></li>
         <li><a href="index.html#roles">服务体系</a></li>
-        <li><a href="index.html#catalog">服务目录</a></li>
+        <li><a href="index.html#catalog" style="color: var(--color-text);">服务目录</a></li>
         <li><a href="index.html#process">启动流程</a></li>
         <li><a href="index.html#sla">SLA</a></li>
         <li><a href="index.html#commitments">承诺</a></li>
         <li><a href="case-study.html">成功案例</a></li>
+        <li><a href="faq.html">常见问题</a></li>
       </ul>
-      <a href="index.html#contact" class="nav-cta">立即咨询</a>
+      <div style="display: flex; align-items: center; gap: var(--space-4);">
+        <button id="themeToggle" class="btn btn-secondary" style="padding: var(--space-2) var(--space-4); font-size: var(--text-sm);" title="切换主题">
+          <span id="themeIcon">🌙</span>
+        </button>
+        <a href="index.html#contact" class="nav-cta">立即咨询</a>
+      </div>
     </div>
   </nav>
 
@@ -401,17 +407,37 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-logo">信诺 e 服 <span>ETS</span></div>
+        <div class="footer-logo">信诺e服<span>ETS</span></div>
         <p class="footer-text">© 2025 信诺时代科技发展有限公司。All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Theme toggle
-    const html = document.documentElement;
-    const savedTheme = localStorage.getItem('ets-theme') || 'dark';
-    html.setAttribute('data-theme', savedTheme);
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    
+    function updateThemeIcon() {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      themeIcon.textContent = isLight ? '☀️' : '🌙';
+    }
+    
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+        updateThemeIcon();
+        localStorage.setItem('theme', isLight ? 'dark' : 'light');
+      });
+      
+      // Load saved theme
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon();
+      }
+    }
   </script>
 </body>
 </html>

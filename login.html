@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录 - 信诺时代 ETS 企业高级技术支持服务</title>
+  <meta name="description" content="登录信诺时代 ETS 服务门户，管理您的服务请求和工时">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS 变量系统（OKLCH 色彩空间）===== */
+    :root {
+      /* 基础色板 - OKLCH */
+      --color-bg: #0f0f0f;
+      --color-bg-alt: #161616;
+      --color-surface: rgba(30, 30, 30, 0.8);
+      --color-surface-hover: rgba(40, 40, 40, 0.9);
+      
+      /* 中性色（带暖色调，非纯灰） */
+      --color-text: #f0f0f0;
+      --color-text-secondary: #a8a8a8;
+      --color-text-muted: #6b6b6b;
+      --color-border: rgba(255, 255, 255, 0.12);
+      --color-border-strong: rgba(255, 255, 255, 0.2);
+      
+      /* 强调色 - 蓝青渐变 */
+      --color-primary: oklch(0.65 0.18 250);
+      --color-primary-hover: oklch(0.55 0.2 250);
+      --color-accent: oklch(0.7 0.15 180);
+      --color-gradient: linear-gradient(135deg, oklch(0.65 0.18 250) 0%, oklch(0.7 0.15 180) 100%);
+      
+      /* 功能色 */
+      --color-success: oklch(0.7 0.14 150);
+      --color-warning: oklch(0.75 0.16 70);
+      --color-error: oklch(0.65 0.2 25);
+      
+      /* 字体系统 */
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      
+      /* 字体比例 */
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.38vw, 1rem);
+      --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.63vw, 1.25rem);
+      --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+      --text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+      --text-3xl: clamp(1.875rem, 1.5rem + 1.88vw, 2.5rem);
+      --text-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3rem);
+      --text-5xl: clamp(3rem, 2.25rem + 3.75vw, 4rem);
+      
+      /* 间距系统 */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+      --space-32: 8rem;
+      
+      /* 圆角 */
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-2xl: 1.5rem;
+      --radius-full: 9999px;
+      
+      /* 阴影 */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
+      
+      /* 动效 */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-fast: 150ms;
+      --duration-base: 250ms;
+      --duration-slow: 400ms;
+      
+      /* 布局 */
+      --container-max: 1280px;
+      --content-max: 65ch;
+      --header-height: 72px;
+    }
+
+    /* ===== 基础重置 ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ===== 主题切换 ===== */
+    [data-theme="light"] {
+      --color-bg: #ffffff;
+      --color-bg-alt: #f8f9fa;
+      --color-surface: rgba(255, 255, 255, 0.9);
+      --color-surface-hover: rgba(248, 249, 250, 0.95);
+      --color-text: #1a1a1a;
+      --color-text-secondary: #525252;
+      --color-text-muted: #525252;
+      --color-border: rgba(0, 0, 0, 0.12);
+      --color-border-strong: rgba(0, 0, 0, 0.2);
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.12);
+      background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.03) 0%, transparent 50%);
+    }
+
+    /* ===== 无障碍 Focus 状态 ===== */
+    .btn:focus-visible,
+    .input-field:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    /* ===== 尊重 prefers-reduced-motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ===== 通用组件 ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--duration-base) var(--ease-out);
+      cursor: pointer;
+      border: none;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background: var(--color-gradient);
+      color: white;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-text);
+      border: 1px solid var(--color-border-strong);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-surface);
+      border-color: var(--color-text-muted);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--space-8);
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: rgba(15, 15, 15, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+
+    [data-theme="light"] .navbar {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--color-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-8);
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      transition: color var(--duration-base) var(--ease-out);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
+    }
+
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--color-border-strong);
+      color: var(--color-text);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      font-size: var(--text-sm);
+      transition: all var(--duration-base) var(--ease-out);
+    }
+
+    .theme-toggle:hover {
+      background: var(--color-surface);
+    }
+
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* ===== Login Section ===== */
+    .login-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--header-height) + var(--space-16)) var(--space-8) var(--space-16);
+      background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+    }
+
+    [data-theme="light"] .login-section {
+      background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+                  radial-gradient(ellipse at bottom right, rgba(6, 182, 212, 0.03) 0%, transparent 50%);
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .login-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-10);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .login-header h1 {
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      margin-bottom: var(--space-2);
+      background: var(--color-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .login-header p {
+      color: var(--color-text-secondary);
+      font-size: var(--text-sm);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-5);
+    }
+
+    .form-label {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      color: var(--color-text);
+      font-size: var(--text-base);
+      font-family: var(--font-sans);
+      transition: all var(--duration-base) var(--ease-out);
+    }
+
+    .input-field::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    .input-field:hover {
+      border-color: var(--color-border-strong);
+    }
+
+    .input-field:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-6);
+      font-size: var(--text-sm);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      color: var(--color-text-secondary);
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: color var(--duration-base) var(--ease-out);
+    }
+
+    .forgot-link:hover {
+      color: var(--color-primary-hover);
+      text-decoration: underline;
+    }
+
+    .btn-login {
+      margin-bottom: var(--space-6);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--space-6);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    .divider span {
+      padding: 0 var(--space-3);
+    }
+
+    .social-login {
+      display: flex;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .btn-social {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3);
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      color: var(--color-text);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--duration-base) var(--ease-out);
+      text-decoration: none;
+    }
+
+    .btn-social:hover {
+      background: var(--color-surface-hover);
+      border-color: var(--color-border-strong);
+    }
+
+    .btn-social svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .register-link {
+      text-align: center;
+      color: var(--color-text-secondary);
+      font-size: var(--text-sm);
+    }
+
+    .register-link a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: var(--color-bg-alt);
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-8) 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+
+    .footer-logo {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .footer-logo span {
+      color: var(--color-primary);
+    }
+
+    .footer-text {
+      color: var(--color-text-muted);
+      font-size: var(--text-xs);
+    }
+
+    @media (max-width: 768px) {
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .login-card {
+        padding: var(--space-6);
+      }
+      
+      .login-header h1 {
+        font-size: var(--text-2xl);
+      }
+    }
+
+    /* ===== 错误提示 ===== */
+    .error-message {
+      background: rgba(255, 59, 48, 0.1);
+      border: 1px solid var(--color-error);
+      border-radius: var(--radius-lg);
+      padding: var(--space-3) var(--space-4);
+      color: var(--color-error);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-5);
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* ===== 成功提示 ===== */
+    .success-message {
+      background: rgba(52, 199, 89, 0.1);
+      border: 1px solid var(--color-success);
+      border-radius: var(--radius-lg);
+      padding: var(--space-3) var(--space-4);
+      color: var(--color-success);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-5);
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">信诺e服<span>ETS</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#stats">客户数据</a></li>
+        <li><a href="index.html#pain-points">痛点</a></li>
+        <li><a href="index.html#solution">解决方案</a></li>
+        <li><a href="index.html#comparison">对比</a></li>
+        <li><a href="index.html#roles">服务体系</a></li>
+        <li><a href="index.html#catalog">服务目录</a></li>
+        <li><a href="index.html#process">启动流程</a></li>
+        <li><a href="index.html#sla">SLA</a></li>
+        <li><a href="index.html#commitments">承诺</a></li>
+        <li><a href="case-study.html">成功案例</a></li>
+        <li><a href="faq.html">常见问题</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: var(--space-4);">
+        <button id="themeToggle" class="btn btn-secondary" style="padding: var(--space-2) var(--space-4); font-size: var(--text-sm);" title="切换主题">
+          <span id="themeIcon">🌙</span>
+        </button>
+        <a href="index.html#contact" class="nav-cta">立即咨询</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Login Section -->
+  <section class="login-section">
+    <div class="container login-container">
+      <div class="login-card">
+        <div class="login-header">
+          <h1>欢迎回来</h1>
+          <p>登录 ETS 服务门户，管理您的技术支持服务</p>
+        </div>
+
+        <!-- 错误提示 -->
+        <div id="errorMessage" class="error-message">
+          <span id="errorText"></span>
+        </div>
+
+        <!-- 成功提示 -->
+        <div id="successMessage" class="success-message">
+          <span id="successText"></span>
+        </div>
+
+        <form id="loginForm" novalidate>
+          <div class="form-group">
+            <label for="email" class="form-label">企业邮箱</label>
+            <input 
+              type="email" 
+              id="email" 
+              class="input-field" 
+              placeholder="name@company.com"
+              required
+              autocomplete="email"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">密码</label>
+            <input 
+              type="password" 
+              id="password" 
+              class="input-field" 
+              placeholder="请输入密码"
+              required
+              autocomplete="current-password"
+            >
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-group">
+              <input type="checkbox" id="remember">
+              <span>记住我</span>
+            </label>
+            <a href="#" class="forgot-link">忘记密码？</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-login">
+            登录
+          </button>
+        </form>
+
+        <div class="divider">
+          <span>或其他方式登录</span>
+        </div>
+
+        <div class="social-login">
+          <a href="#" class="btn-social" title="使用企业微信登录">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8.5 11.5c.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5-1.5.7-1.5 1.5.7 1.5 1.5 1.5zm5 0c.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5-1.5.7-1.5 1.5.7 1.5 1.5 1.5z"/>
+              <path d="M12 2C6.5 2 2 5.8 2 10.5c0 2.6 1.4 4.9 3.6 6.4-.1.6-.4 1.6-.5 1.8-.1.3 0 .6.3.7.1 0 .2.1.3.1.2 0 .4-.1.6-.2.2-.1 1.5-.9 2.2-1.3 1.1.3 2.3.5 3.5.5 5.5 0 10-3.8 10-8.5S17.5 2 12 2zm0 15c-1.1 0-2.2-.2-3.2-.5l-2.3 1.4.6-2.1C5.2 14.6 4 12.6 4 10.5 4 6.9 7.6 4 12 4s8 2.9 8 6.5-3.6 6.5-8 6.5z"/>
+            </svg>
+            企业微信
+          </a>
+          <a href="#" class="btn-social" title="使用钉钉登录">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+            钉钉
+          </a>
+        </div>
+
+        <p class="register-link">
+          还没有账号？<a href="#">联系企业管理员</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">信诺e服<span>ETS</span></div>
+        <p class="footer-text">© 2025 信诺时代科技发展有限公司。All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    
+    function updateThemeIcon() {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      themeIcon.textContent = isLight ? '☀️' : '🌙';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+      updateThemeIcon();
+      localStorage.setItem('theme', isLight ? 'dark' : 'light');
+    });
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeIcon();
+    }
+
+    // Login Form Handler
+    const loginForm = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+    const successMessage = document.getElementById('successMessage');
+    const successText = document.getElementById('successText');
+
+    function showError(message) {
+      errorText.textContent = message;
+      errorMessage.classList.add('show');
+      successMessage.classList.remove('show');
+    }
+
+    function showSuccess(message) {
+      successText.textContent = message;
+      successMessage.classList.add('show');
+      errorMessage.classList.remove('show');
+    }
+
+    function hideMessages() {
+      errorMessage.classList.remove('show');
+      successMessage.classList.remove('show');
+    }
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideMessages();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const remember = document.getElementById('remember').checked;
+
+      // 基础验证
+      if (!email) {
+        showError('请输入企业邮箱');
+        document.getElementById('email').focus();
+        return;
+      }
+
+      if (!email.includes('@')) {
+        showError('请输入有效的企业邮箱地址');
+        document.getElementById('email').focus();
+        return;
+      }
+
+      if (!password) {
+        showError('请输入密码');
+        document.getElementById('password').focus();
+        return;
+      }
+
+      if (password.length < 6) {
+        showError('密码长度至少为 6 位');
+        document.getElementById('password').focus();
+        return;
+      }
+
+      // 模拟登录（实际使用时替换为真实 API 调用）
+      try {
+        // 禁用按钮防止重复提交
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = '登录中...';
+
+        // 模拟 API 调用延迟
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        // TODO: 实际使用时替换为真实登录 API
+        // const response = await fetch('/api/login', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ email, password, remember })
+        // });
+
+        // 演示用：显示成功消息
+        showSuccess('登录成功！正在跳转...');
+        
+        // 模拟跳转
+        setTimeout(() => {
+          window.location.href = 'dashboard.html'; // 跳转到控制台页面
+        }, 1000);
+
+      } catch (error) {
+        showError('登录失败，请稍后重试');
+        submitBtn.disabled = false;
+        submitBtn.textContent = '登录';
+      }
+    });
+
+    // 输入框实时验证
+    document.getElementById('email').addEventListener('blur', function() {
+      if (this.value && !this.value.includes('@')) {
+        this.style.borderColor = 'var(--color-error)';
+      } else {
+        this.style.borderColor = '';
+      }
+    });
+
+    // 清空错误状态
+    document.getElementById('email').addEventListener('input', hideMessages);
+    document.getElementById('password').addEventListener('input', hideMessages);
+  </script>
+</body>
+</html>
